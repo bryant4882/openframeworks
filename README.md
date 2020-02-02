@@ -1,3 +1,3 @@
 # openframeworks
 ## OF MFADT Spring 20 
-/Users/macaca43/Desktop/git/openframeworks/download.png
+![logo](https://github.com/bryant4882/openframeworks/blob/master/download.png?raw=true)
