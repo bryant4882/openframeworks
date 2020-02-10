@@ -36,4 +36,13 @@ The file structure contains only single astroid, with different files linkings t
 
 
 # Project_3
+## Conway's Game of Life
+#### User : General Public
+#### Context : Consist of numerous cells (in a grid system) which contain one of the each states : Alive or Dead, each of them interact with their 8 neighbors.
+Every cell must abide by the following rules :
+1. Any live cell with two or three neighbors survives.
+2. Any dead cell with three live neighbors becomes a live cell.
+3. All other live cells die in the next generation. Similarly, all other dead cells stay dead.
+
+Its a game without human interaction, influenced by it's initial status.
 
