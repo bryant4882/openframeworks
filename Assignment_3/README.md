@@ -1,6 +1,6 @@
 # Project_1
 ## Concept
-#### A brief history of Artificial Intelligence in movies
+### A brief history of Artificial Intelligence in movies
 #### User : General Public
 #### Platform/Form : 2D Motion Graphic
 
