@@ -9,7 +9,7 @@ From Metropolis to Her, a 5 minute ish video about various A.I.s/ Robots portray
 #### Visual:
 Recreating scenes from the selected movies with minimalist styles using basic geometric shapes, linking the transition with outline of the protagonist through transformation.
 
-! [p1 illu]( imags/illu.JPG)
+![p1 illu](imags/illu.JPG)
 
 
 # Project_2
