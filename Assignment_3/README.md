@@ -19,15 +19,20 @@ Recreating scenes from the selected movies with minimalist styles using basic ge
 #### Context:
 NeoWs (Near Earth Object Web Service) is a RESTful web service for near earth Asteroid information. With NeoWs a user can: search for Asteroids based on their closest approach date to Earth, lookup a specific Asteroid with its NASA JPL small body id, as well as browse the overall data-set.
 
+Data-set: All the data is from the NASA JPL Asteroid team (http://neo.jpl.nasa.gov/).
+
 #### Experience:
 Simple graphic indicating newr earch orbiting objects, with attatched attributes like Radious, Dates....etc) 
 
-Data-set: All the data is from the NASA JPL Asteroid team (http://neo.jpl.nasa.gov/).
+![p2](images/orbit.png)
+
+
 
 #### Potential obstacles:
 The file structure contains only single astroid, with different files linkings to different astroids, I am not sure how complicated incorporating multiple api in of would be or if its even possible. 
 
 #### Inspriation: [[OpenFrameworks] Data Visualization with ofxJSON](https://vimeo.com/110925630)
+
 
 
 # Project_3
