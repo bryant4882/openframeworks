@@ -24,6 +24,11 @@ Simple graphic indicating newr earch orbiting objects, with attatched attributes
 
 Data-set: All the data is from the NASA JPL Asteroid team (http://neo.jpl.nasa.gov/).
 
+#### Potential obstacles:
+The file structure contains only single astroid, with different files linkings to different astroids, I am not sure how complicated incorporating multiple api in of would be or if its even possible. 
+
+#### Inspriation: [[OpenFrameworks] Data Visualization with ofxJSON](https://vimeo.com/110925630)
+
 
 # Project_3
 
