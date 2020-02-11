@@ -46,3 +46,7 @@ Every cell must abide by the following rules :
 
 Its a game without human interaction, influenced by it's initial status.
 
+
+# OF Elements
+![demo](images/demo.png)
+![demo](images/demo.gif)
