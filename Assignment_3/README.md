@@ -48,5 +48,6 @@ Its a game without human interaction, influenced by it's initial status.
 
 
 # OF Elements
+Click on Hal to see the demo video  ↴  ↴  ↴  ↴  ↴
 [![demo](images/demo.png)](https://www.youtube.com/watch?v=WRg_L3AxWU4)
 ![demo](images/demo.gif)
