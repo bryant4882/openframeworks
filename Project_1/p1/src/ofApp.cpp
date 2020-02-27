@@ -28,19 +28,55 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
-    ofBackground(grey);
-    float W = ofGetWidth();
-    float H = ofGetHeight();
 
-    for (int i=-10000; i<W; i+=70){
-        for(int o=-10000; o<H; o+=70){
-            ofSetColor(233, 79, 55);
-            ofDrawCircle(i+(ofGetFrameNum())*30, o+(ofGetFrameNum())*20, 27);
+    draw2();
+}
+//--------------------------------------------------------------
+void ofApp::draw1(){
+        
+    ofBackground(grey);
+        float W = ofGetWidth();
+        float H = ofGetHeight();
+
+        for (int i=-10000; i<W; i+=70){
+            for(int o=-10000; o<H; o+=70){
+                ofSetColor(233, 79, 55);
+                ofDrawCircle(i+(ofGetFrameNum())*30, o+(ofGetFrameNum())*20, 27);
+            }
         }
     }
-}
+//--------------------------------------------------------------
+void ofApp::draw2(){
 
+    ofSetCircleResolution(128);
+    ofPushMatrix();
+    cam.begin();
+    ofTranslate(440, 190);
+    float radius = 4;
+    for (int i = 0; i<21; i++){
+        float noisex = ofNoise(ofGetElapsedTimef()+i)*1;
+        float noisey = ofNoise(ofGetElapsedTimef()+i)*1;
+        float noisez = ofNoise(ofGetElapsedTimef()+i)*1;
+        
+        float x = ofGetWidth()/2*noisex;
+        float y = ofGetWidth()/2*noisey;
+        float z = ofGetWidth()/2*noisez;
+        
+        ofNoFill();
+        ofSetColor(255);
+        ofDrawCircle(x, y, z, radius);
+        radius += i;
+        ofPopMatrix();
+        cam.end();
+        
+        
+        
+    }
+
+
+
+
+}
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
