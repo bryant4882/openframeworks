@@ -66,8 +66,8 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    draw3();
-    drawcable();
+    draw2();
+    //drawcable();
 }
 //--------------------------------------------------------------
 void ofApp::drawcable(){
@@ -96,12 +96,12 @@ void ofApp::draw2(){
     ofSetCircleResolution(128);
     ofPushMatrix();
     cam.begin();
-    ofTranslate(440, 190);
+    ofTranslate(40, 190);
     float radius = 4;
     for (int i = 0; i<21; i++){
-        float noisex = ofNoise(ofGetElapsedTimef()+i)*1;
-        float noisey = ofNoise(ofGetElapsedTimef()+i)*1;
-        float noisez = ofNoise(ofGetElapsedTimef()+i)*1;
+        float noisex = ofNoise(ofGetElapsedTimef()+i)*0.3;
+        float noisey = ofNoise(ofGetElapsedTimef()+i)*0.3;
+        float noisez = ofNoise(ofGetElapsedTimef()+i)*0.3;
         
         float x = ofGetWidth()/2*noisex;
         float y = ofGetWidth()/2*noisey;
@@ -111,8 +111,9 @@ void ofApp::draw2(){
         ofSetColor(255);
         ofDrawCircle(x, y, z, radius);
         radius += i;
+         cam.end();
         ofPopMatrix();
-        cam.end();
+       
         
         
         
