@@ -67,6 +67,14 @@ void ofApp::update(){
 void ofApp::draw(){
 
     draw3();
+    drawcable();
+}
+//--------------------------------------------------------------
+void ofApp::drawcable(){
+ 
+    ofSetColor(255, 0, 0);
+    ofFill();
+    ofDrawCircle(640, 360, 60);
 }
 //--------------------------------------------------------------
 void ofApp::draw1(){
