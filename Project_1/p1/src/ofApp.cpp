@@ -11,9 +11,14 @@ int size = 96;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+
     
+//mesh----------------------------------------------------------------
+    int p;
+    p=1;
     int size = 96;
-    cam.setDistance(100);
+    cam.setDistance(7.5);
+    //6.5 >>
     
     for (int x= 0; x<size; x++){
         for (int y= 0; y<size; y++){
@@ -21,18 +26,18 @@ void ofApp::setup(){
         }
     }
     
-    for (int x =0; x< size-1; x++){
-        for (int y = 0; y < size-1; y++){
+    for (int x =0; x< size-p; x++){
+        for (int y = 0; y < size-p; y++){
             mesh.addIndex(x + y * size);
-            mesh.addIndex((x+1) + y * size);
-            mesh.addIndex(x + (y+1) * size);
-            mesh.addIndex((x+1) + y * size);
-            mesh.addIndex((x+1) + (y+1) * size);
-            mesh.addIndex(x + (y+1) * size);
+            mesh.addIndex((x+p) + y * size);
+            mesh.addIndex(x + (y+p) * size);
+            mesh.addIndex((x+p) + y * size);
+            mesh.addIndex((x+p) + (y+p) * size);
+            mesh.addIndex(x + (y+p) * size);
         }
     }
     
-
+//----------------------------------------------------------------
     ofSetFrameRate(60);
     
 
@@ -44,11 +49,13 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    
+//mesh-------------------------------------------------------------
     int count = 0;
     for (int x = 0; x < size; x++){
         for( int y = 0; y <size; y++){
             ofVec3f position = mesh.getVertex(count);
-            position.z = ofMap(ofNoise(count, ofGetElapsedTimef()), 0, 1, 0, ofRandom(0, 2));
+            position.z = ofMap(ofNoise(count, ofGetElapsedTimef()), 0, 1, 0, ofRandom(0, 12));
             mesh.setVertex(count, position);
             count++;
         }
@@ -131,6 +138,7 @@ void ofApp::draw3(){
 //    }
     
     ofPushMatrix();
+    ofTranslate(40, 20, 200);
     cam.begin();
     ofSetColor(255);
     mesh.drawWireframe();
