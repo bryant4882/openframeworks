@@ -6,10 +6,31 @@ ofColor grey = (246, 247, 235);
 ofColor orang = (233, 79, 55);
 ofColor lblue = (124, 198, 254);
 float currentTime = 0;
+int size = 96;
 
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
+    int size = 96;
+    cam.setDistance(100);
+    
+    for (int x= 0; x<size; x++){
+        for (int y= 0; y<size; y++){
+            mesh.addVertex(ofPoint(x - size /2, y - size / 2));
+        }
+    }
+    
+    for (int x =0; x< size-1; x++){
+        for (int y = 0; y < size-1; y++){
+            mesh.addIndex(x + y * size);
+            mesh.addIndex((x+1) + y * size);
+            mesh.addIndex(x + (y+1) * size);
+            mesh.addIndex((x+1) + y * size);
+            mesh.addIndex((x+1) + (y+1) * size);
+            mesh.addIndex(x + (y+1) * size);
+        }
+    }
     
 
     ofSetFrameRate(60);
@@ -23,13 +44,22 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    int count = 0;
+    for (int x = 0; x < size; x++){
+        for( int y = 0; y <size; y++){
+            ofVec3f position = mesh.getVertex(count);
+            position.z = ofMap(ofNoise(count, ofGetElapsedTimef()), 0, 1, 0, ofRandom(0, 2));
+            mesh.setVertex(count, position);
+            count++;
+        }
+    }
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    draw2();
+    draw3();
 }
 //--------------------------------------------------------------
 void ofApp::draw1(){
@@ -77,6 +107,38 @@ void ofApp::draw2(){
 
 
 }
+//--------------------------------------------------------------
+void ofApp::draw3(){
+    
+//    int size = 96;
+//    cam.setDistance(100);
+//
+//    for (int x= 0; x<size; x++){
+//        for (int y= 0; y<size; y++){
+//            mesh.addVertex(ofPoint(x - size /2, y - size / 2));
+//        }
+//    }
+//
+//    for (int x =0; x< size-1; x++){
+//        for (int y = 0; y < size-1; y++){
+//            mesh.addIndex(x + y * size);
+//            mesh.addIndex((x+1) + y * size);
+//            mesh.addIndex(x + (y+1) * size);
+//            mesh.addIndex((x+1) + y * size);
+//            mesh.addIndex((x+1) + (y+1) * size);
+//            mesh.addIndex(x + (y+1) * size);
+//        }
+//    }
+    
+    ofPushMatrix();
+    cam.begin();
+    ofSetColor(255);
+    mesh.drawWireframe();
+    
+    cam.end();
+    ofPopMatrix();
+}
+    
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 

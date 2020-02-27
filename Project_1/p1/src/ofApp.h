@@ -11,6 +11,9 @@ class ofApp : public ofBaseApp{
     
         void draw1();
         void draw2();
+        void draw3();
+    
+    
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y );
@@ -24,5 +27,6 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     ofEasyCam cam;
+    ofMesh mesh;
 		
 };
