@@ -106,6 +106,7 @@ void ofApp::draw(){
     fbo.draw(0, 0);
 
     if(pin.y==base.y-115){
+        draw3();
         draw4();}
 //    draw2();
     //draw3();
