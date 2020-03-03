@@ -7,13 +7,37 @@ ofColor orang = (233, 79, 55);
 ofColor lblue = (124, 198, 254);
 float currentTime = 0;
 int size = 96;
+int fade = 0;
+
+ofVec2f base, socket, pin, ni;
+
+ofFbo fbo;
+float fading;
+bool fPressed;
 
 
 //--------------------------------------------------------------
 void ofApp::setup(){
 
     
-//mesh----------------------------------------------------------------
+     fbo.allocate(ofGetWindowWidth(), ofGetWindowHeight());
+     fbo.begin();
+     ofClear(0);
+     fbo.end();
+    
+    ofSetBackgroundColor(0);
+    
+    ofSetCircleResolution(128);
+    float mw = ofGetWidth()/2;
+    float mh = ofGetHeight()/2;
+    
+    //vec set-------------------------------------------------------
+
+    base.set(mw, mh);
+    pin.set(mw-100, mh-240);
+    
+    
+    //mesh----------------------------------------------------------------
     int p;
     p=1;
     int size = 96;
@@ -50,6 +74,14 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
+    if(fPressed == true){
+        fade += 1;
+    }
+    
+    if(pin.y<=base.y-115){
+        pin.y++;}else{
+            pin.y = base.y-115;}
+    
 //mesh-------------------------------------------------------------
     int count = 0;
     for (int x = 0; x < size; x++){
@@ -65,16 +97,91 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    fbo.begin();
+    ofSetColor(140, 60, 240, fade);
+    ofDrawRectangle(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+    fbo.end();
 
-    draw2();
-    //drawcable();
+    fbo.draw(0, 0);
+
+    if(pin.y==base.y-115){
+        draw4();}
+//    draw2();
+    //draw3();
+    //draw4();
+    drawcable();
+    
+    
+    fbo.begin();
+    ofSetColor(140, 60, 240, fade);
+    ofDrawRectangle(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+    fbo.end();
+
+    fbo.draw(0, 0);
+    
+   
+
+    
+    
 }
 //--------------------------------------------------------------
 void ofApp::drawcable(){
  
-    ofSetColor(255, 0, 0);
+    float mw = ofGetWidth()/2;
+    float mh = ofGetHeight()/2;
+
+    
+   
+//
+//    //nid-------------------
+//    ofSetColor(180);
+//    ofFill();
+//    ofRectangle nid;
+//    nid.x = pin.x+10;
+//    nid.y + pin.y+70;
+//    nid.width = 10;
+//    nid.height = 45;
+//
+//    ofDrawRectRounded(nid, 2);
+//
+//    //nid1-------------------
+//    ofSetColor(180);
+//    ofFill();
+//    ofRectangle nid1;
+//    nid1.x = pin.x+55;
+//    nid1.y + pin.y+70;
+//    nid1.width = 10;
+//    nid1.height = 45;
+//
+//    ofDrawRectRounded(nid1, 2);
+    
+    //pin---------------------
+    
+    ofSetColor(200);
     ofFill();
-    ofDrawCircle(640, 360, 60);
+    ofRectangle pi;
+    pi.x = pin.x;
+    pi.y = pin.y;
+    pi.width = 80;
+    pi.height = 80;
+    
+    ofDrawRectRounded(pi, 10);
+    
+   
+  //base--------------------
+    
+       ofSetColor(255);
+       ofFill();
+       ofRectangle ba;
+       ba.x = base.x-200;
+       ba.y = base.y-35;
+       ba.width = 400;
+       ba.height = 70;
+
+       ofDrawRectRounded( ba, 30);
+    
+
 }
 //--------------------------------------------------------------
 void ofApp::draw1(){
@@ -145,11 +252,47 @@ void ofApp::draw3(){
 //            mesh.addIndex(x + (y+1) * size);
 //        }
 //    }
+    ofBackground(0);
     
     ofPushMatrix();
     ofTranslate(40, 20, 200);
     cam.begin();
+    ofSetColor(0,0,255);
+    ofSetLineWidth(5);
+    mesh.drawWireframe();
+    
+    cam.end();
+    ofPopMatrix();
+}
+//--------------------------------------------------------------
+void ofApp::draw4(){
+    
+//    int size = 96;
+//    cam.setDistance(100);
+//
+//    for (int x= 0; x<size; x++){
+//        for (int y= 0; y<size; y++){
+//            mesh.addVertex(ofPoint(x - size /2, y - size / 2));
+//        }
+//    }
+//
+//    for (int x =0; x< size-1; x++){
+//        for (int y = 0; y < size-1; y++){
+//            mesh.addIndex(x + y * size);
+//            mesh.addIndex((x+1) + y * size);
+//            mesh.addIndex(x + (y+1) * size);
+//            mesh.addIndex((x+1) + y * size);
+//            mesh.addIndex((x+1) + (y+1) * size);
+//            mesh.addIndex(x + (y+1) * size);
+//        }
+//    }
+   // ofBackground(0);
+    
+    ofPushMatrix();
+    ofTranslate(120, 60, 200);
+    cam.begin();
     ofSetColor(255);
+    ofSetLineWidth(2);
     mesh.drawWireframe();
     
     cam.end();
@@ -159,6 +302,9 @@ void ofApp::draw3(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+    if(key == 'f'){
+        fPressed = true;
+    }
 }
 
 //--------------------------------------------------------------
@@ -174,16 +320,19 @@ void ofApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
 
+    base.set(x,y);
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
 
+    pin.set(x, y);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
 
+     base.set(ofGetWidth()/2,ofGetHeight()/2);
 }
 
 //--------------------------------------------------------------

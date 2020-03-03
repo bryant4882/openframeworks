@@ -12,6 +12,7 @@ class ofApp : public ofBaseApp{
         void draw1();
         void draw2();
         void draw3();
+        void draw4();
         void drawcable();
     
     
