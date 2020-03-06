@@ -21,7 +21,22 @@ int no = 0;
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    boop.loadSound("dash.wav");
+  //  ofSetVerticalSync(true);
+    
+    //gui bla-------------------------------
+    
+    gui.setup(); // most of the time you don't need a name
+    gui.add(emoF.setup("Next"));
+    gui.add(emoB.setup("Previous"));
+    gui.add(center.setup("center", {ofGetWidth()*.5, ofGetHeight()*.5}, {0, 0}, {ofGetWidth(), ofGetHeight()}));
+    gui.add(color.setup("color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
+    gui.add(deg.setup("how intense huh", 5, 3, 90));
+    gui.add(screenSize.setup("screen size", ofToString(ofGetWidth())+"x"+ofToString(ofGetHeight())));
+    
+    
+    //-----------------------------------------
+    
+    //boop.loadSound("dash.wav");
 
 
     ofSetFrameRate(60);
@@ -43,6 +58,8 @@ void ofApp::update(){
 //--------------------------------------------------------------
 
 void ofApp::draw(){
+    
+    gui.draw();
     
     
     ofSetColor(blue);
