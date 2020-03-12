@@ -171,6 +171,138 @@
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
+			<key>676E9236FB8CD7C8771D68E4</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxVectorGraphics.h</string>
+				<key>path</key>
+				<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/src/ofxVectorGraphics.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>3801B04C72ADFE74ED284693</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>C2805AC0E13320776EE59053</string>
+					<string>676E9236FB8CD7C8771D68E4</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>src</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>B5B991EAA9009C660634B56B</key>
+			<dict>
+				<key>fileRef</key>
+				<string>C2805AC0E13320776EE59053</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>C2805AC0E13320776EE59053</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxVectorGraphics.cpp</string>
+				<key>path</key>
+				<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/src/ofxVectorGraphics.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>9426551299A3127B9A2CB33C</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>CreEPS_Types.hpp</string>
+				<key>path</key>
+				<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/libs/CreEPS_Types.hpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>D89AAD108BD312644CAAD3B4</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>CreEPS.hpp</string>
+				<key>path</key>
+				<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/libs/CreEPS.hpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>0F437E4761003E66B16524BE</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>C6523B339E93E476B0402573</string>
+					<string>D89AAD108BD312644CAAD3B4</string>
+					<string>9426551299A3127B9A2CB33C</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>libs</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>916B8DF9E7519F5BB8A2990B</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>0F437E4761003E66B16524BE</string>
+					<string>3801B04C72ADFE74ED284693</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>ofxVectorGraphics</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>AC9362D3621A8D5A10BD12B1</key>
+			<dict>
+				<key>fileRef</key>
+				<string>C6523B339E93E476B0402573</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>C6523B339E93E476B0402573</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>CreEPS.cpp</string>
+				<key>path</key>
+				<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/libs/CreEPS.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
 			<key>7B6B1CF5CFFE1EF6963050E6</key>
 			<dict>
 				<key>explicitFileType</key>
@@ -789,6 +921,8 @@ fi
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxGui/src</string>
+						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/libs</string>
+						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/src</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxXmlSettings/libs</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxXmlSettings/src</string>
 					</array>
@@ -834,6 +968,8 @@ fi
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxGui/src</string>
+						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/libs</string>
+						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/src</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxXmlSettings/libs</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxXmlSettings/src</string>
 					</array>
@@ -872,6 +1008,7 @@ fi
 				<key>children</key>
 				<array>
 					<string>480A780D8D0308AE4A368801</string>
+					<string>916B8DF9E7519F5BB8A2990B</string>
 					<string>1F4FB5C423662B96ADFDCC0B</string>
 				</array>
 				<key>isa</key>
@@ -3639,6 +3776,8 @@ fi
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxGui/src</string>
+						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/libs</string>
+						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/src</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxXmlSettings/libs</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxXmlSettings/src</string>
 					</array>
@@ -3704,6 +3843,8 @@ fi
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxGui/src</string>
+						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/libs</string>
+						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/src</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxXmlSettings/libs</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxXmlSettings/src</string>
 					</array>
@@ -3742,6 +3883,8 @@ fi
 					<string>5979311798F7758F076679F5</string>
 					<string>D2AF7EB6FE840D14C49896A2</string>
 					<string>A061C438470FA5FE9EB0AFA8</string>
+					<string>AC9362D3621A8D5A10BD12B1</string>
+					<string>B5B991EAA9009C660634B56B</string>
 					<string>93D51D412A67223C9F549B44</string>
 					<string>39BB333DE8B082B8ADEC163A</string>
 					<string>9DAD5C36C231622F285F8EAD</string>
@@ -3846,6 +3989,8 @@ fi
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxGui/src</string>
+						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/libs</string>
+						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/src</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxXmlSettings/libs</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxXmlSettings/src</string>
 					</array>
@@ -3900,6 +4045,8 @@ fi
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxGui/src</string>
+						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/libs</string>
+						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxVectorGraphics/src</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxXmlSettings/libs</string>
 						<string>../../../../../Documents/of_v0.11.0_osx_release/addons/ofxXmlSettings/src</string>
 					</array>

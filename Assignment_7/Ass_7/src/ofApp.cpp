@@ -1,7 +1,4 @@
 #include "ofApp.h"
-
-ofSoundPlayer boop;
-
 int x, y, w, h;
 
 //palette
@@ -10,7 +7,6 @@ ofColor blue(58, 144, 181);
 ofColor black (0);
 ofColor white (255);
 
-ofPolyline line;
 
 float mx, my, mw, mh;
 float length = 30;
@@ -20,24 +16,6 @@ int no = 0;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    
-  //  ofSetVerticalSync(true);
-    
-    //gui bla-------------------------------
-    
-    gui.setup(); // most of the time you don't need a name
-    gui.add(emoF.setup("Next"));
-    gui.add(emoB.setup("Previous"));
-    gui.add(center.setup("center", {ofGetWidth()*.5, ofGetHeight()*.5}, {0, 0}, {ofGetWidth(), ofGetHeight()}));
-    gui.add(color.setup("color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
-    gui.add(deg.setup("how intense huh", 5, 3, 90));
-    gui.add(screenSize.setup("screen size", ofToString(ofGetWidth())+"x"+ofToString(ofGetHeight())));
-    
-    
-    //-----------------------------------------
-    
-    //boop.loadSound("dash.wav");
-
 
     ofSetFrameRate(60);
     ofBackground(yellow);
@@ -48,6 +26,13 @@ void ofApp::setup(){
     mw = 30;
     mh = 10;
     
+    gui.setup(); // most of the time you don't need a name
+    gui.add(volumeFloatSlider.setup("volume", 0.2f, 0.0f, 1.0f));
+    gui.add(backgroundColorSlider.setup("color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
+    gui.add(sunVecSlider.setup("sun position",ofVec2f(ofGetWidth()*.5, ofGetHeight()*.25), ofVec2f(0, 0), ofVec2f(ofGetWidth(), ofGetHeight())));
+    gui.add(changeExpressionButton.setup("change expression"));
+    gui.add(emotionalIntSlider.setup("emotional", 5, 0, 10));
+    
 }
 
 //--------------------------------------------------------------
@@ -56,39 +41,26 @@ void ofApp::update(){
 }
 
 //--------------------------------------------------------------
-
 void ofApp::draw(){
+    
+    
     
     gui.draw();
     
+    ofSetRectMode(OF_RECTMODE_CENTER);
+    
+    
     
     ofSetColor(blue);
-    ofSetLineWidth(1);
-    ofFill();
-    line.addVertex(ofVec3f(w/2-w/10, h/2-100));
-    line.addVertex(ofVec3f(w/2-w/10, h/2+h/6));
-    line.addVertex(ofVec3f(w/2+w/10, h/2+100));
-    line.addVertex(ofVec3f(w/2+w/10, h/2-h/6));
-    line.addVertex(ofVec3f(w/2, h/2-h/6));
-    line.close();
-    line.draw();
-    
-//    ofSetRectMode(OF_RECTMODE_CENTER);
-//
-//
-//
-//    ofSetColor(blue);
-//    ofRectangle face;
-//    face.x = w/2;
-//    face.y = h/2;
-//    face.width = w/5;
-//    face.height = h/3;
-//    ofDrawRectRounded(face, 20);
+    ofRectangle face;
+    face.x = w/2;
+    face.y = h/2;
+    face.width = w/5;
+    face.height = h/3;
+    ofDrawRectRounded(face, 20);
     
     
     //eyes
-    ofPushMatrix();
-    ofTranslate(-10, 0);
     ofSetColor(white);
     ofRectangle leye;
     leye.x = w/2 - 30;
@@ -104,7 +76,6 @@ void ofApp::draw(){
     reye.width = 20;
     reye.height = 20;
     ofDrawRectRounded(reye, 10);
-    ofPopMatrix();
     
 //    //mouth
 //    ofSetColor(white);
@@ -123,7 +94,6 @@ void ofApp::draw(){
 //state id
     if (no == 0){
         drawhappy();
-        
     }
     if (no == 1){
         drawsad();
@@ -136,9 +106,6 @@ void ofApp::draw(){
     }
 
     if ((ofGetFrameNum()%120) == 0){
-        
-        boop.play();
-        
         if (no > 2){
             no=0;
         }else {
