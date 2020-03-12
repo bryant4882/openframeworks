@@ -30,16 +30,22 @@ class ofApp : public ofBaseApp{
         void gotMessage(ofMessage msg);
         bool bHide;
     
-    ofxFloatSlider volume;
+    
+    void ButtonPressed();
+    void volumeFloatSliderChanged(float & volumeFloatSlider) ;
+    ofSoundPlayer bgm;
+    float bgmVolume = 0.2f;
+    
+    ofxFloatSlider volumeFloatSlider;
     ofxColorSlider color;
     ofxVec2Slider center;
-    ofxIntSlider intensity;
-    ofxButton scene;
+    ofxIntSlider dis;
+    ofxButton Button;
     ofxLabel screenSize;
 
     ofxPanel gui;
 
-    ofSoundPlayer ring;
+    //ofSoundPlayer ring;
     
     ofEasyCam cam;
     ofMesh mesh;

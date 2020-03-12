@@ -1,5 +1,5 @@
 #include "ofApp.h"
-
+int counter;
 
 float SpeedX, SpeedY;
 ofColor grey = (246, 247, 235);
@@ -19,49 +19,49 @@ bool fPressed;
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-    
+    counter =0;
      fbo.allocate(ofGetWindowWidth(), ofGetWindowHeight());
      fbo.begin();
      ofClear(0);
      fbo.end();
     
-    ofSetBackgroundColor(0);
-    
-    ofSetCircleResolution(128);
-    float mw = ofGetWidth()/2;
-    float mh = ofGetHeight()/2;
+
+    Button.addListener(this, &ofApp::ButtonPressed);
+    volumeFloatSlider.addListener(this, &ofApp::volumeFloatSliderChanged);
     
     //guis---------------------------------------------------------
     gui.setup(); // most of the time you don't need a name
-    gui.add(volume.setup("volume", 140, 10, 300));
+    gui.add(volumeFloatSlider.setup("volume", 0.2f, 0.0f, 1.0f));
     gui.add(center.setup("center", {ofGetWidth()*.5, ofGetHeight()*.5}, {0, 0}, {ofGetWidth(), ofGetHeight()}));
     gui.add(color.setup("color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
-    gui.add(intensity.setup("intensity", 5, 3, 90));
-    gui.add(scene.setup("scene"));
+    gui.add(dis.setup("dis", 7, 6, 15));
+    gui.add(Button.setup("scene"));
     gui.add(screenSize.setup("screen size", ofToString(ofGetWidth())+"x"+ofToString(ofGetHeight())));
     
-    ofxFloatSlider volume;
-       ofxColorSlider color;
-       ofxVec2Slider center;
-       ofxIntSlider intensity;
-       ofxButton scene;
-       ofxLabel screenSize;
+    ofSetBackgroundColor(color);
+    
+    ofSetCircleResolution(128);
+    float mw = center->x;
+    float mh = center->y;
 
     bHide = false;
 
-    ring.load("ring.wav");
+    bgm.load("Noise.mp3");
+    bgm.play();
+    bgm.setLoop(true);
+    bgm.setVolume(bgmVolume);
     
     //vec set-------------------------------------------------------
 
-    base.set(mw, mh);
-    pin.set(mw-100, mh-240);
+    base.set(center->x, center->y);
+    pin.set(center->x-100, center->y-240);
     
     
     //mesh----------------------------------------------------------------
     int p;
     p=1;
     int size = 96;
-    cam.setDistance(7.5);
+    cam.setDistance(7);
     //6.5 >>
     
     for (int x= 0; x<size; x++){
@@ -94,13 +94,15 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
+    cam.setDistance(dis);
+    
     if(fPressed == true){
         fade += 1;
     }
     
-    if(pin.y<=base.y-115){
+    if(pin.y<=center->y-115){
         pin.y++;}else{
-            pin.y = base.y-115;}
+            pin.y = center->y-115;}
     
 //mesh-------------------------------------------------------------
     int count = 0;
@@ -125,13 +127,29 @@ void ofApp::draw(){
 
     fbo.draw(0, 0);
 
-    if(pin.y==base.y-115){
-        draw3();
-        draw4();}
+    if(pin.y==center->y-115){
+       
+        if (counter == 0){
+             draw1();
+        }else if (counter == 1){
+            draw2();
+        }else if (counter == 2){
+            draw3();
+            draw4();
+        }
+    }else if (counter==3){
+        counter=0;
+    }
+    
+    drawcable();
+
+
+        
+       
 //    draw2();
     //draw3();
     //draw4();
-    drawcable();
+    
     
     
     fbo.begin();
@@ -149,10 +167,22 @@ void ofApp::draw(){
     
 }
 //--------------------------------------------------------------
+void ofApp::ButtonPressed(){
+    
+    counter++;
+    
+}
+//-----------------------------------------------
+void ofApp::volumeFloatSliderChanged(float & volumeFloatSlider ) {
+    bgm.setVolume(volumeFloatSlider);
+}
+
+
+//--------------------------------------------------------------
 void ofApp::drawcable(){
  
-    float mw = ofGetWidth()/2;
-    float mh = ofGetHeight()/2;
+    float mw = ofGetWindowWidth()/2;
+    float mh = ofGetWindowHeight()/2;
 
     
    
@@ -197,8 +227,8 @@ void ofApp::drawcable(){
        ofSetColor(255);
        ofFill();
        ofRectangle ba;
-       ba.x = base.x-200;
-       ba.y = base.y-35;
+       ba.x = center->x-200;
+       ba.y = center->y-35;
        ba.width = 400;
        ba.height = 70;
 
@@ -209,7 +239,7 @@ void ofApp::drawcable(){
 //--------------------------------------------------------------
 void ofApp::draw1(){
         
-    ofBackground(grey);
+    ofBackground(color);
         float W = ofGetWidth();
         float H = ofGetHeight();
 
@@ -223,6 +253,7 @@ void ofApp::draw1(){
 //--------------------------------------------------------------
 void ofApp::draw2(){
 
+    ofSetBackgroundColor(color);?
     ofSetCircleResolution(128);
     ofPushMatrix();
     cam.begin();
@@ -275,7 +306,7 @@ void ofApp::draw3(){
 //            mesh.addIndex(x + (y+1) * size);
 //        }
 //    }
-    ofBackground(0);
+    ofBackground(color);
     
     ofPushMatrix();
     ofTranslate(40, 20, 200);
