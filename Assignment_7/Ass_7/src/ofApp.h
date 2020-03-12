@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofMain.h"
 #include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
@@ -11,12 +10,13 @@ class ofApp : public ofBaseApp{
         void update();
         void draw();
     
-       
-        void drawhappy();
-        void drawsad();
-        void drawsurp();
-        void drawmad();
-
+        void draw1();
+        void draw2();
+        void draw3();
+        void draw4();
+        void drawcable();
+    
+    
         void keyPressed(int key);
         void keyReleased(int key);
         void mouseMoved(int x, int y );
@@ -28,21 +28,20 @@ class ofApp : public ofBaseApp{
         void windowResized(int w, int h);
         void dragEvent(ofDragInfo dragInfo);
         void gotMessage(ofMessage msg);
+        bool bHide;
     
-        void volumeFloatSliderChanged(float & volumeFloatSlider) ;
-        void changeExpressionButtonPressed();
-    
-        ofSoundPlayer bgm;
-        float bgmVolume = 0.2f;
-    
-        ofxPanel gui;
+    ofxFloatSlider volume;
+    ofxColorSlider color;
+    ofxVec2Slider center;
+    ofxIntSlider intensity;
+    ofxButton scene;
+    ofxLabel screenSize;
 
-        ofxFloatSlider volumeFloatSlider;
-        ofxButton changeExpressionButton;
-        ofxVec2Slider sunVecSlider;
-        ofxColorSlider backgroundColorSlider;
-        ofxIntSlider emotionalIntSlider;
+    ofxPanel gui;
+
+    ofSoundPlayer ring;
     
-        ofxLabel screenSize;
-            
+    ofEasyCam cam;
+    ofMesh mesh;
+        
 };

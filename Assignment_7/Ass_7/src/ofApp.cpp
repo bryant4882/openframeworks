@@ -1,237 +1,333 @@
 #include "ofApp.h"
-int x, y, w, h;
-
-//palette
-ofColor yellow(252, 212, 101);
-ofColor blue(58, 144, 181);
-ofColor black (0);
-ofColor white (255);
 
 
-float mx, my, mw, mh;
-float length = 30;
-float currenttime = 0;
-int no = 0;
+float SpeedX, SpeedY;
+ofColor grey = (246, 247, 235);
+ofColor orang = (233, 79, 55);
+ofColor lblue = (124, 198, 254);
+float currentTime = 0;
+int size = 96;
+int fade = 0;
+
+ofVec2f base, socket, pin, ni;
+
+ofFbo fbo;
+float fading;
+bool fPressed;
 
 
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-    ofSetFrameRate(60);
-    ofBackground(yellow);
-    w = ofGetWidth();
-    h = ofGetHeight();
-    mx = w/2;
-    my = h/2;
-    mw = 30;
-    mh = 10;
     
+     fbo.allocate(ofGetWindowWidth(), ofGetWindowHeight());
+     fbo.begin();
+     ofClear(0);
+     fbo.end();
+    
+    ofSetBackgroundColor(0);
+    
+    ofSetCircleResolution(128);
+    float mw = ofGetWidth()/2;
+    float mh = ofGetHeight()/2;
+    
+    //guis---------------------------------------------------------
     gui.setup(); // most of the time you don't need a name
-    gui.add(volumeFloatSlider.setup("volume", 0.2f, 0.0f, 1.0f));
-    gui.add(backgroundColorSlider.setup("color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
-    gui.add(sunVecSlider.setup("sun position",ofVec2f(ofGetWidth()*.5, ofGetHeight()*.25), ofVec2f(0, 0), ofVec2f(ofGetWidth(), ofGetHeight())));
-    gui.add(changeExpressionButton.setup("change expression"));
-    gui.add(emotionalIntSlider.setup("emotional", 5, 0, 10));
+    gui.add(volume.setup("volume", 140, 10, 300));
+    gui.add(center.setup("center", {ofGetWidth()*.5, ofGetHeight()*.5}, {0, 0}, {ofGetWidth(), ofGetHeight()}));
+    gui.add(color.setup("color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
+    gui.add(intensity.setup("intensity", 5, 3, 90));
+    gui.add(scene.setup("scene"));
+    gui.add(screenSize.setup("screen size", ofToString(ofGetWidth())+"x"+ofToString(ofGetHeight())));
+    
+    ofxFloatSlider volume;
+       ofxColorSlider color;
+       ofxVec2Slider center;
+       ofxIntSlider intensity;
+       ofxButton scene;
+       ofxLabel screenSize;
+
+    bHide = false;
+
+    ring.load("ring.wav");
+    
+    //vec set-------------------------------------------------------
+
+    base.set(mw, mh);
+    pin.set(mw-100, mh-240);
+    
+    
+    //mesh----------------------------------------------------------------
+    int p;
+    p=1;
+    int size = 96;
+    cam.setDistance(7.5);
+    //6.5 >>
+    
+    for (int x= 0; x<size; x++){
+        for (int y= 0; y<size; y++){
+            mesh.addVertex(ofPoint(x - size /2, y - size / 2));
+        }
+    }
+    
+    for (int x =0; x< size-p; x++){
+        for (int y = 0; y < size-p; y++){
+            mesh.addIndex(x + y * size);
+            mesh.addIndex((x+p) + y * size);
+            mesh.addIndex(x + (y+p) * size);
+            mesh.addIndex((x+p) + y * size);
+            mesh.addIndex((x+p) + (y+p) * size);
+            mesh.addIndex(x + (y+p) * size);
+        }
+    }
+    
+//----------------------------------------------------------------
+    ofSetFrameRate(60);
+    
+
+    
+    SpeedX = ofGetFrameNum()-currentTime;
+    SpeedY = ofGetFrameNum()-currentTime;
     
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    
+    if(fPressed == true){
+        fade += 1;
+    }
+    
+    if(pin.y<=base.y-115){
+        pin.y++;}else{
+            pin.y = base.y-115;}
+    
+//mesh-------------------------------------------------------------
+    int count = 0;
+    for (int x = 0; x < size; x++){
+        for( int y = 0; y <size; y++){
+            ofVec3f position = mesh.getVertex(count);
+            position.z = ofMap(ofNoise(count, ofGetElapsedTimef()), 0, 1, 0, ofRandom(0, 12));
+            mesh.setVertex(count, position);
+            count++;
+        }
+    }
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    
-    
-    gui.draw();
-    
-    ofSetRectMode(OF_RECTMODE_CENTER);
-    
-    
-    
-    ofSetColor(blue);
-    ofRectangle face;
-    face.x = w/2;
-    face.y = h/2;
-    face.width = w/5;
-    face.height = h/3;
-    ofDrawRectRounded(face, 20);
-    
-    
-    //eyes
-    ofSetColor(white);
-    ofRectangle leye;
-    leye.x = w/2 - 30;
-    leye.y = h/2 - 30;
-    leye.width = 20;
-    leye.height = 20;
-    ofDrawRectRounded(leye, 10);
-    
-    ofSetColor(white);
-    ofRectangle reye;
-    reye.x = w/2 + 30;
-    reye.y = h/2 - 30;
-    reye.width = 20;
-    reye.height = 20;
-    ofDrawRectRounded(reye, 10);
-    
-//    //mouth
-//    ofSetColor(white);
-//    ofDrawEllipse(mx, my, mw, mh);
-    
+    fbo.begin();
+    ofSetColor(140, 60, 240, fade);
+    ofDrawRectangle(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+    fbo.end();
 
+    fbo.draw(0, 0);
+
+    if(pin.y==base.y-115){
+        draw3();
+        draw4();}
+//    draw2();
+    //draw3();
+    //draw4();
+    drawcable();
+    
+    
+    fbo.begin();
+    ofSetColor(140, 60, 240, fade);
+    ofDrawRectangle(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+    fbo.end();
+
+    fbo.draw(0, 0);
+    
+   if(!bHide){
+       gui.draw();
+   }
 
     
-    //brow global vars
-    float browlx = leye.x-18;
-    float browly = leye.y-20;
     
-    float browrx = reye.x+17;
-    float browry = reye.y-20;
-    
-//state id
-    if (no == 0){
-        drawhappy();
-    }
-    if (no == 1){
-        drawsad();
-    }
-    if (no == 2){
-        drawsurp();
-    }
-    if (no == 3){
-        drawmad();
-    }
+}
+//--------------------------------------------------------------
+void ofApp::drawcable(){
+ 
+    float mw = ofGetWidth()/2;
+    float mh = ofGetHeight()/2;
 
-    if ((ofGetFrameNum()%120) == 0){
-        if (no > 2){
-            no=0;
-        }else {
-            no++;
-            currenttime = ofGetFrameNum();
+    
+   
+//
+//    //nid-------------------
+//    ofSetColor(180);
+//    ofFill();
+//    ofRectangle nid;
+//    nid.x = pin.x+10;
+//    nid.y + pin.y+70;
+//    nid.width = 10;
+//    nid.height = 45;
+//
+//    ofDrawRectRounded(nid, 2);
+//
+//    //nid1-------------------
+//    ofSetColor(180);
+//    ofFill();
+//    ofRectangle nid1;
+//    nid1.x = pin.x+55;
+//    nid1.y + pin.y+70;
+//    nid1.width = 10;
+//    nid1.height = 45;
+//
+//    ofDrawRectRounded(nid1, 2);
+    
+    //pin---------------------
+    
+    ofSetColor(200);
+    ofFill();
+    ofRectangle pi;
+    pi.x = pin.x;
+    pi.y = pin.y;
+    pi.width = 80;
+    pi.height = 80;
+    
+    ofDrawRectRounded(pi, 10);
+    
+   
+  //base--------------------
+    
+       ofSetColor(255);
+       ofFill();
+       ofRectangle ba;
+       ba.x = base.x-200;
+       ba.y = base.y-35;
+       ba.width = 400;
+       ba.height = 70;
+
+       ofDrawRectRounded( ba, 30);
+    
+
+}
+//--------------------------------------------------------------
+void ofApp::draw1(){
+        
+    ofBackground(grey);
+        float W = ofGetWidth();
+        float H = ofGetHeight();
+
+        for (int i=-10000; i<W; i+=70){
+            for(int o=-10000; o<H; o+=70){
+                ofSetColor(233, 79, 55);
+                ofDrawCircle(i+(ofGetFrameNum())*30, o+(ofGetFrameNum())*20, 27);
+            }
         }
     }
-    
-    
-}
+//--------------------------------------------------------------
+void ofApp::draw2(){
 
-    //happybrows
-
-    void ofApp::drawhappy(){
-
+    ofSetCircleResolution(128);
+    ofPushMatrix();
+    cam.begin();
+    ofTranslate(40, 190);
+    float radius = 4;
+    for (int i = 0; i<21; i++){
+        float noisex = ofNoise(ofGetElapsedTimef()+i)*0.3;
+        float noisey = ofNoise(ofGetElapsedTimef()+i)*0.3;
+        float noisez = ofNoise(ofGetElapsedTimef()+i)*0.3;
         
-    float browlx = w/2 - 30-18;
-    float browly = h/2 - 30-20;
-    
-    float browrx = w/2 + 30+17;
-    float browry = h/2 - 30-20;
+        float x = ofGetWidth()/2*noisex;
+        float y = ofGetWidth()/2*noisey;
+        float z = ofGetWidth()/2*noisez;
         
-    ofSetColor(white);
-    ofSetLineWidth(15);
-
-    ofDrawLine(browlx, browly-0.1*(ofGetFrameNum()-currenttime), browlx+length, browly-0.1*(ofGetFrameNum()-currenttime));
-
-    ofDrawLine(browrx, browry-0.1*(ofGetFrameNum()-currenttime), browrx-length, browry-0.1*(ofGetFrameNum()-currenttime));
-
-    //happymouth
-
-    ofSetColor(white);
-    ofDrawBezier(mx-15, my, mx-15, my+0.1*(ofGetFrameNum()-currenttime), mx+15, my+0.1*(ofGetFrameNum()-currenttime), mx+15, my);
-    
+        ofNoFill();
+        ofSetColor(255);
+        ofDrawCircle(x, y, z, radius);
+        radius += i;
+         cam.end();
+        ofPopMatrix();
+       
+        
+        
+        
     }
-    //madbrows
-   
-void ofApp::drawmad(){
-    
-    float browlx = w/2 - 30-18;
-    float browly = h/2 - 30-20;
-    
-    float browrx = w/2 + 30+17;
-    float browry = h/2 - 30-20;
 
-    ofSetColor(white);
-    ofSetLineWidth(15);
 
-    ofPushMatrix();
-    ofTranslate(browlx+length, browly);
-    ofRotateDeg(0.1 * (ofGetFrameNum() - currenttime));
-    ofDrawLine(0, 0, -length, 0);
-    ofPopMatrix();
 
-    ofPushMatrix();
-    ofTranslate(browrx-length, browry);
-    ofRotateDeg(-0.1 * (ofGetFrameNum() - currenttime));
-    ofDrawLine(0, 0, length, 0);
-    ofPopMatrix();
-    
-        //mouth
-        ofSetColor(white);
-        ofDrawEllipse(mx, my, mw, mh);
 
 }
-//sadbrows
-
-void ofApp::drawsad(){
+//--------------------------------------------------------------
+void ofApp::draw3(){
     
-    float browlx = w/2 - 30-18;
-    float browly = h/2 - 30-20;
-    
-    float browrx = w/2 + 30+17;
-    float browry = h/2 - 30-20;
-    
-    ofSetColor(white);
-    ofSetLineWidth(15);
-
-    ofPushMatrix();
-    ofTranslate(browlx+length, browly);
-    ofRotateDeg(-0.1 * (ofGetFrameNum() - currenttime));
-    ofDrawLine(0, 0, -length, 0);
-    ofPopMatrix();
-
-    ofPushMatrix();
-    ofTranslate(browrx-length, browry);
-    ofRotateDeg(0.1 * (ofGetFrameNum() - currenttime));
-    ofDrawLine(0, 0, length, 0);
-    ofPopMatrix();
-    
-        //mouth
-        ofSetColor(white);
-        ofDrawEllipse(mx, my, mw, mh);
-    
-}
+//    int size = 96;
+//    cam.setDistance(100);
 //
-    //surprisebrows
+//    for (int x= 0; x<size; x++){
+//        for (int y= 0; y<size; y++){
+//            mesh.addVertex(ofPoint(x - size /2, y - size / 2));
+//        }
+//    }
+//
+//    for (int x =0; x< size-1; x++){
+//        for (int y = 0; y < size-1; y++){
+//            mesh.addIndex(x + y * size);
+//            mesh.addIndex((x+1) + y * size);
+//            mesh.addIndex(x + (y+1) * size);
+//            mesh.addIndex((x+1) + y * size);
+//            mesh.addIndex((x+1) + (y+1) * size);
+//            mesh.addIndex(x + (y+1) * size);
+//        }
+//    }
+    ofBackground(0);
     
-void ofApp::drawsurp(){
+    ofPushMatrix();
+    ofTranslate(40, 20, 200);
+    cam.begin();
+    ofSetColor(0,0,255);
+    ofSetLineWidth(5);
+    mesh.drawWireframe();
     
-    float browlx = w/2 - 30-18;
-    float browly = h/2 - 30-20;
-    
-    float browrx = w/2 + 30+17;
-    float browry = h/2 - 30-20;
-    
-    ofSetColor(white);
-    ofSetLineWidth(15);
-
-    ofDrawLine(browlx, browly-0.1*(ofGetFrameNum()-currenttime), browlx+length, browly-0.1*(ofGetFrameNum()-currenttime));
-    
-    ofDrawLine(browrx, browry-0.1*(ofGetFrameNum()-currenttime), browrx-length, browry-0.1*(ofGetFrameNum()-currenttime));
-
-    //surprisemouth
-    
-   
-        ofSetColor(white);
-        ofDrawEllipse(mx, my, mw+0.07*(ofGetFrameNum()- currenttime), mh+0.1*(ofGetFrameNum()- currenttime));
-    
-    
-
+    cam.end();
+    ofPopMatrix();
 }
-
+//--------------------------------------------------------------
+void ofApp::draw4(){
+    
+//    int size = 96;
+//    cam.setDistance(100);
+//
+//    for (int x= 0; x<size; x++){
+//        for (int y= 0; y<size; y++){
+//            mesh.addVertex(ofPoint(x - size /2, y - size / 2));
+//        }
+//    }
+//
+//    for (int x =0; x< size-1; x++){
+//        for (int y = 0; y < size-1; y++){
+//            mesh.addIndex(x + y * size);
+//            mesh.addIndex((x+1) + y * size);
+//            mesh.addIndex(x + (y+1) * size);
+//            mesh.addIndex((x+1) + y * size);
+//            mesh.addIndex((x+1) + (y+1) * size);
+//            mesh.addIndex(x + (y+1) * size);
+//        }
+//    }
+   // ofBackground(0);
+    
+    ofPushMatrix();
+    ofTranslate(120, 60, 200);
+    cam.begin();
+    ofSetColor(255);
+    ofSetLineWidth(2);
+    mesh.drawWireframe();
+    
+    cam.end();
+    ofPopMatrix();
+}
+    
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+    if(key == 'f'){
+        fPressed = true;
+    }
 }
 
 //--------------------------------------------------------------
@@ -247,16 +343,19 @@ void ofApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
 
+    base.set(x,y);
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
 
+    pin.set(x, y);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
 
+     base.set(ofGetWidth()/2,ofGetHeight()/2);
 }
 
 //--------------------------------------------------------------
