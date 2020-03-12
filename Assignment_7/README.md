@@ -1,9 +1,13 @@
 # GUI
 
 Float slider: Volume
+
 Int slider: Camera distance
+
 Button: Toggle next scene
+
 Vec2f slider: Base position
+
 Color: Background color
 
 #### Youtube link:
