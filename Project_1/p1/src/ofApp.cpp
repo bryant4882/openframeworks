@@ -10,6 +10,7 @@ int size = 96;
 int fade = 0;
 
 
+
 ofVec2f base, socket, pin, ni;
 
 ofFbo fbo;
@@ -29,6 +30,7 @@ void ofApp::setup(){
     ofSetBackgroundColor(0);
     
     ofSetCircleResolution(128);
+    ofSetCurveResolution(320);
     float mw = ofGetWidth()/2;
     float mh = ofGetHeight()/2;
     
@@ -74,6 +76,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+   // cam.setDistance(ofGetMouseY());
     
     if(fPressed == true){
         fade += 1;
@@ -109,12 +112,14 @@ void ofApp::draw(){
     
   //  -------------edge dectection
     
-  //  if(pin.y==base.y-115){
-    //    draw3();
-    //    draw4();}
+   if(pin.y==base.y-115){
+        draw3();
+        draw4();}
+    //draw1();
 //    draw2();
     //draw3();
-    //draw4();
+   // draw4();
+   // draw5();
     drawcable();
 //-----------------
     
@@ -166,7 +171,7 @@ void ofApp::drawcable(){
     
     //pin---------------------
     
-    ofSetColor(200);
+    ofSetColor(255);
     ofFill();
     ofRectangle pi;
     pi.x = pin.x;
@@ -187,13 +192,13 @@ void ofApp::drawcable(){
        ba.width = 400;
        ba.height = 70;
 
-       ofDrawRectRounded( ba, 30);
+       ofDrawRectRounded( ba, 10);
     
 //CABLE-----------------
     ctf = ofGetElapsedTimef(); //--current time in frames
-        ofSetLineWidth(3);
+        ofSetLineWidth(10);
         ofNoFill();
-        ofDrawCurve(ba.x, ba.y, ofGetMouseX(), ofGetMouseY(), 200*ofNoise(ctf), 400*ofNoise(ctf), 600*ofNoise(ctf), 1400*ofNoise(ctf));
+        ofDrawBezier(ba.x+10, ba.y+ba.height/2, 200*ofNoise(ctf), 400*ofNoise(ctf), 700*ofNoise(ctf), 200*ofNoise(ctf), pi.x+pi.width/2, pi.y+20);
     
 
 }
