@@ -1,13 +1,14 @@
 #include "ofApp.h"
 
 
-float SpeedX, SpeedY;
+float SpeedX, SpeedY, ctf;
 ofColor grey = (246, 247, 235);
 ofColor orang = (233, 79, 55);
 ofColor lblue = (124, 198, 254);
 float currentTime = 0;
 int size = 96;
 int fade = 0;
+
 
 ofVec2f base, socket, pin, ni;
 
@@ -105,14 +106,20 @@ void ofApp::draw(){
 
     fbo.draw(0, 0);
 
-    if(pin.y==base.y-115){
-        draw3();
-        draw4();}
+    
+  //  -------------edge dectection
+    
+  //  if(pin.y==base.y-115){
+    //    draw3();
+    //    draw4();}
 //    draw2();
     //draw3();
     //draw4();
     drawcable();
+//-----------------
     
+ 
+    //draw5();
     
     fbo.begin();
     ofSetColor(140, 60, 240, fade);
@@ -181,6 +188,12 @@ void ofApp::drawcable(){
        ba.height = 70;
 
        ofDrawRectRounded( ba, 30);
+    
+//CABLE-----------------
+    ctf = ofGetElapsedTimef(); //--current time in frames
+        ofSetLineWidth(3);
+        ofNoFill();
+        ofDrawCurve(ba.x, ba.y, ofGetMouseX(), ofGetMouseY(), 200*ofNoise(ctf), 400*ofNoise(ctf), 600*ofNoise(ctf), 1400*ofNoise(ctf));
     
 
 }
@@ -298,6 +311,18 @@ void ofApp::draw4(){
     
     cam.end();
     ofPopMatrix();
+}
+
+void ofApp::draw5(){
+ 
+    ofBackground(0);
+    ofSetColor(255);
+    ofSetLineWidth(3);
+    ofNoFill();
+    
+   // ofDrawCurve(20, 20, ofGetMouseX(), ofGetMouseY(), ofRandom(200,400), ofRandom(200,800), ofRandom(500,700), ofRandom(1120,1180));
+       // ofDrawCurve(20, 20, ofGetMouseX(), ofGetMouseY(), 100, 200, 500,1120);
+    
 }
     
 //--------------------------------------------------------------
