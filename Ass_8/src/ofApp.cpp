@@ -71,9 +71,14 @@ ofDrawBitmapString(text.str(), 20, 100);
 ofDrawBitmapString(textTime.str(), 20, 40);
 
 
-int x = ofMap(current, sunset, sunrise, 0, ofGetWidth());
-ofSetColor(ofColor::orange);
-ofDrawCircle(x, 300, 50);
+int x = ofMap(temp_c, 20, 90, 0, 255);    //temp current to col
+float y = ofMap(humidity_c, 0, 1, 0, 255);       //humidity
+float z = ofMap(tempHigh, 20, 90, 0, 255); //temp 2morrow high
+float q = ofMap((sunrise/60/60/24)%365, 0, 365, 0, ofGetWidth());  //DAYOFYEaR
+    
+    
+ofSetColor(x,y,z);
+ofDrawCircle(q, 300, 50);
 
 cout<<sunset<<","<<sunrise<<","<<current<<","<<x<<endl;
 }
