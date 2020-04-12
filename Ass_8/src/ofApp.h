@@ -31,5 +31,9 @@ class ofApp : public ofBaseApp{
     
 
        ofxPanel gui;
+    ofxFloatSlider Red;
+    ofxFloatSlider Green;
+    ofxFloatSlider Blue;
+    ofxFloatSlider Pos;
 		
 };

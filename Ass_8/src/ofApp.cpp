@@ -19,6 +19,25 @@ ofLogNotice("ofApp::setup") << root.getRawString(true);
 ofLogNotice("ofApp::setup") << "Failed to parse JSON.";
 }
 
+    float tempHigh = root["daily"]["data"][1]["temperatureHigh"].asFloat();//2morrow's high
+    float temp_c = root["currently"]["temperature"].asFloat();    //current temp
+        
+    int sunset = root["daily"]["data"][0]["sunsetTime"].asInt();  //todays sunset
+    int sunrise = root["daily"]["data"][1]["sunriseTime"].asInt();//2morrows sunrise
+    float humidity_c = root["currently"]["humidity"].asFloat();   //root.currently.humidity
+    
+    
+
+   // int x = ofMap(temp_c, 20, 90, 0, 255);    //temp current to col
+  //  float y = ofMap(humidity_c, 0, 1, 0, 255);       //humidity
+  //  float z = ofMap(tempHigh, 20, 90, 0, 255); //temp 2morrow high
+  //  float q = ofMap((sunrise/60/60/24)%365, 0, 365, 0, ofGetWidth());  //DAYOFYEaR
+int current = time(NULL);
+    gui.setup();
+    gui.add(Red.setup("Red", temp_c, 0, 255));
+    gui.add(Green.setup("Green", tempHigh, 0, 255));
+    gui.add(Blue.setup("Blue", humidity_c*255, 0, 255));
+    gui.add(Pos.setup("Pos", (current/60/60/24)%365, 0, ofGetWidth()));
 
 ofColor yellow = ofColor::yellow;
 ofColor black = ofColor::black;
@@ -51,6 +70,7 @@ int current = time(NULL); // get current epoch
     int day = (current/60/60/24)%365;
     int hour = (current/60/60)%24;
     int minute = (current/60)%24;
+    
 if(ofGetFrameNum()==1){
     text<<"Today's summary is "<<summary<<"."<<endl
         <<"Tomorrow's highest temperature "<<tempHigh<<"."<<endl
@@ -67,20 +87,27 @@ if(ofGetFrameNum()==1){
     
 
 //ofDrawBitmapString(opening,20,40);
-ofDrawBitmapString(text.str(), 20, 100);
-ofDrawBitmapString(textTime.str(), 20, 40);
+ofDrawBitmapString(text.str(), 20, 200);
+ofDrawBitmapString(textTime.str(), 20, 140);
 
 
-int x = ofMap(temp_c, 20, 90, 0, 255);    //temp current to col
-float y = ofMap(humidity_c, 0, 1, 0, 255);       //humidity
-float z = ofMap(tempHigh, 20, 90, 0, 255); //temp 2morrow high
-float q = ofMap((sunrise/60/60/24)%365, 0, 365, 0, ofGetWidth());  //DAYOFYEaR
+//int x = ofMap(temp_c, 20, 90, 0, 255);    //temp current to col
+//float y = ofMap(humidity_c, 0, 1, 0, 255);       //humidity
+//float z = ofMap(tempHigh, 20, 90, 0, 255); //temp 2morrow high
+//float q = ofMap((sunrise/60/60/24)%365, 0, 365, 0, ofGetWidth());  //DAYOFYEaR
     
     
-ofSetColor(x,y,z);
-ofDrawCircle(q, 300, 50);
+ofSetColor(Red,Green,Blue);
+ofDrawCircle(Pos, 300, 50);
+    
 
-cout<<sunset<<","<<sunrise<<","<<current<<","<<x<<endl;
+
+
+    
+     gui.draw();
+            
+
+cout<<sunset<<","<<sunrise<<","<<current<<","<<Pos<<endl;
 }
 
 //--------------------------------------------------------------
