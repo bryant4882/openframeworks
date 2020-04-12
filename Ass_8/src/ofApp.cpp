@@ -32,8 +32,10 @@ void ofApp::update(){
 }
 
 std::ostringstream text;
+std::ostringstream textTime;
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
 std::string opening = "Hello World";
 ofSetColor(200,200,0); // greenish
 std::string summary = root["daily"]["data"][1]["summary"].asString();
@@ -46,18 +48,27 @@ int sunrise = root["daily"]["data"][1]["sunriseTime"].asInt();//2morrows sunrise
 float humidity_c = root["currently"]["humidity"].asFloat();   //root.currently.humidity
    
 int current = time(NULL); // get current epoch
+    int day = (current/60/60/24)%365;
+    int hour = (current/60/60)%24;
+    int minute = (current/60)%24;
 if(ofGetFrameNum()==1){
     text<<"Today's summary is "<<summary<<"."<<endl
-    <<"Tomorrow's highest temperature "<<tempHigh<<"."<<endl
-    <<"Current temoerature "<<temp_c<<"."<<endl
-    <<"Current humidity is "<<humidity_c<<"."<<endl
-    <<"Tomorrow's sun rise at "<<sunrise<<"."<<endl
-    <<"Today's sun set at "<<sunset<<".";
+        <<"Tomorrow's highest temperature "<<tempHigh<<"."<<endl
+        <<"Current temoerature "<<temp_c<<"."<<endl
+        <<"Current humidity is "<<humidity_c<<"."<<endl
+        <<"Tomorrow's sun rise at "<<sunrise<<"."<<endl
     
+        <<"Today's sun set at "<<sunset<<".";
+    textTime<<"Day "<<day<<" of this year."<<endl
+    <<"Hour: "<<hour<<", Minute: "<<minute<<".";
 }
+   
+ //   textTime<<"Day "<<day<<"this year.";
+    
 
-ofDrawBitmapString(opening,20,40);
+//ofDrawBitmapString(opening,20,40);
 ofDrawBitmapString(text.str(), 20, 100);
+ofDrawBitmapString(textTime.str(), 20, 40);
 
 
 int x = ofMap(current, sunset, sunrise, 0, ofGetWidth());
