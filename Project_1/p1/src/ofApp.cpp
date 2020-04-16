@@ -130,12 +130,16 @@ void ofApp::draw(){
         ofFill();
         ofRectangle pi;
         pi.x = ofNoise(0.05*ctf)*pin.x;
-        pi.y = ofNoise(ctf)*pin.y*2;
+        pi.y = ofNoise(ctf)*pin.y*2.5;
         pi.width = 80;
         pi.height = 80;
 
         //----------------------------
-       
+//       if(cframe %3 ==0){
+//       draw3();
+//       draw4();} else if (cframe % 3==1){
+//           draw1();
+//       }else{draw2();}
         
        
       //base--------------------
@@ -143,8 +147,8 @@ void ofApp::draw(){
            ofSetColor(255);
            ofFill();
            ofRectangle ba;
-           ba.x = ofNoise(0.03*ctf)*base.x-200;
-           ba.y = base.y;
+           ba.x = ofNoise(0.3*ctf)*base.x-200;
+           ba.y = ofNoise(1.2*ctf)*base.y+150;
            ba.width = 400;
            ba.height = 30;
     
@@ -152,27 +156,21 @@ void ofApp::draw(){
     
     int cframe = ofGetFrameNum();
     
-    //pi.y = ofNoise(ctf)*pin.y;
-    if(pi.y<=ba.y-80 && pi.x<=ba.x+400 && pi.x+80>=ba.x){
-        
-        if(cframe %3 ==0){
-        draw3();
-        draw4();} else if (cframe % 3==1){
-            draw1();
-        }else{draw2();}
-        
+   // pi.y = 30;
+    if(pi.y>=ba.y-80 && pi.x<=ba.x+400 && pi.x+80>=ba.x){
+//
+//
+//
         pi.y = ba.y-80;
-    }else{
-        pi.y = ofNoise(ctf)*pin.y*2.3;
-        if(pi.y<=ba.y-80){
-            if(cframe %3 ==0){
-                draw3();
-                draw4();} else if (cframe % 3==1){
-                    draw1();
-                }else{draw2();}
-            
-        pi.y = ba.y-80;}
+        
+        draw3();
+        draw4();
+        
     }
+
+            
+//        pi.y = ba.y-80;}
+    
 //    if(pi.y<ba.y-80){
 //        pi.y = ba.y-80;}
 //
