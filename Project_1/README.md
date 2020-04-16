@@ -2,7 +2,7 @@
 
 ### Inspiration:
 
-I wonder what's gonna happen when I plug a extension socket into itself.
+I wonder what's gonna happen when I plug an extension socket into itself.
 [Additional reference](https://www.youtube.com/watch?v=nz3lNLybeDo)
 
 ### Concept: 
