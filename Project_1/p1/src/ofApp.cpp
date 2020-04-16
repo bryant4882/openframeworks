@@ -9,17 +9,27 @@ float currentTime = 0;
 int size = 96;
 int fade = 0;
 
+ofImage emo;
 
+
+ofSoundPlayer audio;
 
 ofVec2f base, socket, pin, ni;
 
 ofFbo fbo;
 float fading;
 bool fPressed;
-
+float volume = 0;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
+    emo.load("img/emo.jpg");
+    
+    audio.load("audio/audio.mp3");
+    audio.setLoop(true);
+    audio.setVolume(0);
+    audio.play();
 
     
      fbo.allocate(ofGetWindowWidth(), ofGetWindowHeight());
@@ -130,7 +140,7 @@ void ofApp::draw(){
         ofFill();
         ofRectangle pi;
         pi.x = ofNoise(0.05*ctf)*pin.x;
-        pi.y = ofNoise(ctf)*pin.y*2.5;
+        pi.y = ofNoise(ctf)*pin.y*2.5+50;
         pi.width = 80;
         pi.height = 80;
 
@@ -160,6 +170,7 @@ void ofApp::draw(){
     if(pi.y>=ba.y-80 && pi.x<=ba.x+400 && pi.x+80>=ba.x){
 //
 //
+        audio.setVolume(0.2);;
 //
         pi.y = ba.y-80;
         
@@ -184,6 +195,9 @@ void ofApp::draw(){
 
         
     }
+    else{
+        audio.setVolume(0);
+    }
 
             
 //        pi.y = ba.y-80;}
@@ -195,12 +209,14 @@ void ofApp::draw(){
     ofDrawRectRounded(pi, 3);
 
     ofDrawRectRounded( ba, 3);
+    
         
     //CABLE-----------------
         ctf = ofGetElapsedTimef(); //--current time in frames
             ofSetLineWidth(10);
             ofNoFill();
             ofDrawBezier(ba.x+10, ba.y+ba.height/2, 200*ofNoise(ctf), 500*ofNoise(0.5*ctf), 700*ofNoise(ctf), 200*ofNoise(ctf), pi.x+pi.width/2, pi.y+20);
+    emo.draw(pi.x, pi.y, pi.width, pi.height);
     
 
 
