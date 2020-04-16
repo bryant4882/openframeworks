@@ -3,6 +3,7 @@
 ### Inspiration:
 
 I wonder what's gonna happen when I plug a extension socket into itself.
+[Additional reference](https://www.youtube.com/watch?v=nz3lNLybeDo)
 
 ### Concept: 
 
@@ -55,14 +56,4 @@ Not really with a optimal user in mind.
 [![link](imgs/3.jpg)](https://www.youtube.com/watch?v=JYJHQ_nLq5Q)
 
 
-A video of the experience.  Interactivity is not required for this project, but if your program is interactive, you will need to either create a video of you using the program, or annotate a screengrab so we can understand how to interact with the program.
-A 300 word (min) description of your 
-Project concept
-How you translated the concept into something concrete
-What you wish to communicate
-The ideal user of your code
-How you might develop the concept more in future iterations
-Process questions
-Your estimation of successes and potential shortcomings of your translation
-2 (min) Images that support your text
-The URL of your Youtube video
+
