@@ -163,8 +163,25 @@ void ofApp::draw(){
 //
         pi.y = ba.y-80;
         
-        draw3();
-        draw4();
+        int index = 0;
+        int currentf = 0;
+        
+        if (cframe%300 <100){
+            draw1();
+        }
+        if (cframe%300 <200 && cframe%300>100){
+            draw2();
+        }
+        if(cframe%300>200){
+            draw3();
+            draw4();
+        }
+        
+       
+            
+        
+        
+
         
     }
 
@@ -261,17 +278,28 @@ void ofApp::drawcable(){
 //--------------------------------------------------------------
 void ofApp::draw1(){
         
+    int i, o, d;
+    d = 15;
+    
     ofBackground(grey);
         float W = ofGetWidth();
         float H = ofGetHeight();
 
-        for (int i=-10000; i<W; i+=70){
-            for(int o=-10000; o<H; o+=70){
+
+        for (i=-10000; i<W; i+=70){
+            for(o=-10000; o<H; o+=70){
                 ofSetColor(233, 79, 55);
-                ofDrawCircle(i+(ofGetFrameNum())*30, o+(ofGetFrameNum())*20, 27);
+                if (i>1400){
+                    i = 0;
+                    o = 0;
+                }
+                    ofDrawCircle(i+(ofGetFrameNum())*d, o+(ofGetFrameNum())*d, 27);
+                
             }
         }
+        
     }
+    
 //--------------------------------------------------------------
 void ofApp::draw2(){
 
