@@ -1,9 +1,68 @@
 # P1 Extension cord connecting scene
-Drastically changing the background as the plug makes contact with the socket.
 
-Press F to start da purple tint.
+### Inspiration:
 
-![img](imgs/src.png)
+I wonder what's gonna happen when I plug a extension socket into itself.
+
+### Concept: 
+
+Recursive paradox that ultimately breaks time and space. (I  hope)
+Drastically altering the background when the plug makes contact with the socket.
+On and off audio in relation to the socket status.
+
+**:/ Translation**
+
+3 Background scenes in total, with different patterns (mesh, noise, for-loop)
+Shuffling the scenes with ofGetFrameNum() and operator to different sections of time frames. 
+Cord done with Bezier curves with noise embeded in it's anchor points (Probably need to find a better input than system timmer, to make the movement feels more natural)
+Socket and plug moves with ofNoise.
+
+**Further down the road**
+
+There's still a lot of parameters to be tinker with all three backgrounds, especially the mesh one, an obvious path might be setting the tempo and wave height in relation to the audio playing, creating a more consistent environment. ie. Changing the camera angle/distance with different itterations. Creating a counter on how much time those 2 objects had made contact and translate it onto the parameters.
+
+Incorporateing shaders to create a better sence of depth.
+
+**Possible interaction**
+
+Potential to take audio/cam/kinect video as input to control the two objects, possibliy becomming a more engaging experience.
+
+**:/ An anxiety inducing video.**
+
+The main idea is just to visualize and speculate a dumb thing we all might wonder from time to time, the idea of breaking something so trivial yet so integral.
+
+**:/ Process notes.**
+
+Visually requires numerous fine-tunes.
+Technically still trying to figuring out the infinite forloop pattern (Orange dots), currently using a very labor intensive way (Preloading 10000*10000 ish objects)
+
+**:/ Reflection.**
+
+Soft on narrative, feels repetitive wayyyy sooner than expected.
+Not really with a optimal user in mind.
+
+
+
+
+
+
+
+
+![img](imgs/1.jpg)
+![img](imgs/2.jpg)
 
 **Link to Youtube video:**
-[![link](imgs/gif.gif)](https://www.youtube.com/watch?v=FboPrQIsp8Y)
+[![link](imgs/3.jpg)](https://www.youtube.com/watch?v=JYJHQ_nLq5Q)
+
+
+A video of the experience.  Interactivity is not required for this project, but if your program is interactive, you will need to either create a video of you using the program, or annotate a screengrab so we can understand how to interact with the program.
+A 300 word (min) description of your 
+Project concept
+How you translated the concept into something concrete
+What you wish to communicate
+The ideal user of your code
+How you might develop the concept more in future iterations
+Process questions
+Your estimation of successes and potential shortcomings of your translation
+2 (min) Images that support your text
+The URL of your Youtube video

@@ -140,7 +140,7 @@ void ofApp::draw(){
         ofFill();
         ofRectangle pi;
         pi.x = ofNoise(0.05*ctf)*pin.x;
-        pi.y = ofNoise(ctf)*pin.y*2.5+50;
+        pi.y = ofNoise(ctf)*pin.y*2.5+80;
         pi.width = 80;
         pi.height = 80;
 
@@ -177,15 +177,15 @@ void ofApp::draw(){
         int index = 0;
         int currentf = 0;
         
-        if (cframe%600 <200){
-            draw1();
-        }
-        if (cframe%600 <400 && cframe%600>200){
-            draw2();
-        }
-        if(cframe%600>400){
+        if (cframe%600 <300){
             draw3();
             draw4();
+        }
+        if (cframe%600 <450 && cframe%600>300){
+            draw1();
+        }
+        if(cframe%600>450){
+            draw2();
         }
         
        
@@ -295,9 +295,9 @@ void ofApp::drawcable(){
 void ofApp::draw1(){
         
     int i, o, d;
-    d = 15;
+    d = 2;
     
-    ofBackground(grey);
+    ofBackground(0);
         float W = ofGetWidth();
         float H = ofGetHeight();
 
@@ -319,12 +319,14 @@ void ofApp::draw1(){
 //--------------------------------------------------------------
 void ofApp::draw2(){
 
+    ofBackground(0);
     ofSetCircleResolution(128);
     ofPushMatrix();
     cam.begin();
+    ofSetLineWidth(2);
     ofTranslate(40, 190);
     float radius = 4;
-    for (int i = 0; i<21; i++){
+    for (int i = 0; i<40; i++){
         float noisex = ofNoise(ofGetElapsedTimef()+i)*0.3;
         float noisey = ofNoise(ofGetElapsedTimef()+i)*0.3;
         float noisez = ofNoise(ofGetElapsedTimef()+i)*0.3;
