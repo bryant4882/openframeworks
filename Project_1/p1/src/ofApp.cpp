@@ -82,9 +82,9 @@ void ofApp::update(){
         fade += 1;
     }
     
-    if(pin.y<=base.y-115){
-        pin.y++;}else{
-            pin.y = base.y-115;}
+//    if(pin.y<=base.y-95){
+//        pin.y++;}else{
+//            pin.y = base.y-95;}
     
 //mesh-------------------------------------------------------------
     int count = 0;
@@ -111,28 +111,84 @@ void ofApp::draw(){
 
     
   //  -------------edge dectection
-    
-   if(pin.y==base.y-115){
-        draw3();
-        draw4();}
+//
+//   if(pin.y==base.y-115){
+//        draw3();
+//        draw4();}
     //draw1();
 //    draw2();
     //draw3();
    // draw4();
    // draw5();
-    drawcable();
-//-----------------
-    
- 
-    //draw5();
-    
-    fbo.begin();
-    ofSetColor(140, 60, 240, fade);
-    ofDrawRectangle(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
-    fbo.end();
+ //   drawcable();
 
     fbo.draw(0, 0);
     
+        //pin---------------------
+        
+        ofSetColor(255);
+        ofFill();
+        ofRectangle pi;
+        pi.x = ofNoise(0.05*ctf)*pin.x;
+        pi.y = ofNoise(ctf)*pin.y*2;
+        pi.width = 80;
+        pi.height = 80;
+
+        //----------------------------
+       
+        
+       
+      //base--------------------
+        
+           ofSetColor(255);
+           ofFill();
+           ofRectangle ba;
+           ba.x = ofNoise(0.03*ctf)*base.x-200;
+           ba.y = base.y;
+           ba.width = 400;
+           ba.height = 30;
+    
+    //---------------------------------
+    
+    int cframe = ofGetFrameNum();
+    
+    //pi.y = ofNoise(ctf)*pin.y;
+    if(pi.y<=ba.y-80 && pi.x<=ba.x+400 && pi.x+80>=ba.x){
+        
+        if(cframe %3 ==0){
+        draw3();
+        draw4();} else if (cframe % 3==1){
+            draw1();
+        }else{draw2();}
+        
+        pi.y = ba.y-80;
+    }else{
+        pi.y = ofNoise(ctf)*pin.y*2.3;
+        if(pi.y<=ba.y-80){
+            if(cframe %3 ==0){
+                draw3();
+                draw4();} else if (cframe % 3==1){
+                    draw1();
+                }else{draw2();}
+            
+        pi.y = ba.y-80;}
+    }
+//    if(pi.y<ba.y-80){
+//        pi.y = ba.y-80;}
+//
+    
+    ofDrawRectRounded(pi, 3);
+
+    ofDrawRectRounded( ba, 3);
+        
+    //CABLE-----------------
+        ctf = ofGetElapsedTimef(); //--current time in frames
+            ofSetLineWidth(10);
+            ofNoFill();
+            ofDrawBezier(ba.x+10, ba.y+ba.height/2, 200*ofNoise(ctf), 500*ofNoise(0.5*ctf), 700*ofNoise(ctf), 200*ofNoise(ctf), pi.x+pi.width/2, pi.y+20);
+    
+
+
    
 
     
@@ -174,12 +230,12 @@ void ofApp::drawcable(){
     ofSetColor(255);
     ofFill();
     ofRectangle pi;
-    pi.x = pin.x;
+    pi.x = ofNoise(0.05*ctf)*pin.x;
     pi.y = pin.y;
     pi.width = 80;
     pi.height = 80;
     
-    ofDrawRectRounded(pi, 10);
+    ofDrawRectRounded(pi, 3);
     
    
   //base--------------------
@@ -187,18 +243,20 @@ void ofApp::drawcable(){
        ofSetColor(255);
        ofFill();
        ofRectangle ba;
-       ba.x = base.x-200;
+       ba.x = ofNoise(0.03*ctf)*base.x-200;
        ba.y = base.y-35;
        ba.width = 400;
-       ba.height = 70;
+       ba.height = 30;
 
-       ofDrawRectRounded( ba, 10);
+       ofDrawRectRounded( ba, 3);
     
 //CABLE-----------------
     ctf = ofGetElapsedTimef(); //--current time in frames
         ofSetLineWidth(10);
         ofNoFill();
-        ofDrawBezier(ba.x+10, ba.y+ba.height/2, 200*ofNoise(ctf), 400*ofNoise(ctf), 700*ofNoise(ctf), 200*ofNoise(ctf), pi.x+pi.width/2, pi.y+20);
+        ofDrawBezier(ba.x+10, ba.y+ba.height/2, 200*ofNoise(ctf), 500*ofNoise(0.5*ctf), 700*ofNoise(ctf), 200*ofNoise(ctf), pi.x+pi.width/2, pi.y+20);
+    
+    
     
 
 }
