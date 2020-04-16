@@ -166,13 +166,13 @@ void ofApp::draw(){
         int index = 0;
         int currentf = 0;
         
-        if (cframe%300 <100){
+        if (cframe%600 <200){
             draw1();
         }
-        if (cframe%300 <200 && cframe%300>100){
+        if (cframe%600 <400 && cframe%600>200){
             draw2();
         }
-        if(cframe%300>200){
+        if(cframe%600>400){
             draw3();
             draw4();
         }
