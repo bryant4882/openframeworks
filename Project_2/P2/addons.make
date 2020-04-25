@@ -1,4 +1,2 @@
 ofxGui
 ofxJSON
-ofxOpenCv
-ofxVectorGraphics
