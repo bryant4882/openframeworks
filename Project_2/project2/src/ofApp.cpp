@@ -15,7 +15,7 @@ void ofApp::setup(){
     
     ofSetCircleResolution(128);
 
-    std::string url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=2020-04-20&api_key=1SOcQaXmgQXNHuChy7Q7xcQiPJQ6cGV0d5Z4C7y8";
+    std::string url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=2020-04-20&api_key=MY_KEY";
     
     // Now parse the JSON
     bool parsingSuccessful = root.open(url);
