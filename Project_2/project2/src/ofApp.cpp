@@ -14,8 +14,10 @@ std::ostringstream textTime;
 void ofApp::setup(){
     
     ofSetCircleResolution(128);
+    float Width = ofGetWidth();
+    float Height = ofGetHeight();
 
-    std::string url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=2020-04-20&api_key=MY_KEY";
+    std::string url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=2020-04-20&api_key=1SOcQaXmgQXNHuChy7Q7xcQiPJQ6cGV0d5Z4C7y8";
     
     // Now parse the JSON
     bool parsingSuccessful = root.open(url);
@@ -41,20 +43,57 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    float diaMin = root["near_earth_objects"]["2020-04-23"][0]["estimated_diameter"]["meters"]["estimated_diameter_min"].asFloat();
+    float Width = ofGetWidth();
+    float Height = ofGetHeight();
     
-    text<<"dia min = "<<diaMin<<"."<<endl;
+  //-----------------------------------------------------------------------------
+    
+    float diaMin0 = root["near_earth_objects"]["2020-04-23"][0]["estimated_diameter"]["meters"]["estimated_diameter_min"].asFloat();
+    float diaMax0 =
+        root["near_earth_objects"]["2020-04-23"][0]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
+    text<<"dia min = "<<diaMax0<<"."<<endl;
+    float Dia0 = (diaMin0+diaMax0)/2;
    // ofDrawBitmapString(text.str(), 20, 200);
-    float diameter_min = ofMap(diaMin,20, 100, 3, 20); // ****Diameter translation
+    float Diameter0 = ofMap(Dia0,20, 100, 3, 20); // ****Diameter translation
     
-    ofVec2f center(500,500), planet, orbit;
+    //-------------------------------------------------------------------------------
+    
+    
+
+     
+     float diaMin1 = root["near_earth_objects"]["2020-04-23"][1]["estimated_diameter"]["meters"]["estimated_diameter_min"].asFloat();
+     float diaMax1 =
+         root["near_earth_objects"]["2020-04-23"][1]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
+     text<<"dia min = "<<diaMax0<<"."<<endl;
+     float Dia1 = (diaMin1+diaMax1)/2;
+    // ofDrawBitmapString(text.str(), 20, 200);
+     float Diameter1 = ofMap(Dia1,20, 100, 3, 20); // ****Diameter translation
+     
+     //-------------------------------------------------------------------------------
+    
+     float diaMin2 = root["near_earth_objects"]["2020-04-23"][2]["estimated_diameter"]["meters"]["estimated_diameter_min"].asFloat();
+     float diaMax2 =
+         root["near_earth_objects"]["2020-04-23"][2]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
+     text<<"dia min = "<<diaMax0<<"."<<endl;
+     float Dia2 = (diaMin2+diaMax2)/2;
+    // ofDrawBitmapString(text.str(), 20, 200);
+     float Diameter2 = ofMap(Dia2,20, 100, 3, 20); // ****Diameter translation
+     
+     //-------------------------------------------------------------------------------
+    
+    ofVec2f center(Width/2,Height/2), planet, orbit0, orbit1, orbit2, orbit3;
     
     planet = center + 100;
-    orbit = planet.rotate(degrees++, center);
+    orbit0 = planet.rotate(degrees++, center);
+    orbit1 = planet.rotate(degrees--, center);
+    orbit2 = planet.rotate(degrees++, center);
+    orbit3 = planet.rotate(degrees++, center);
 
     ofDrawCircle(center, 50);
-    ofDrawCircle(orbit, diameter_min);  // ****Translation into orbiting entity
-
+    ofDrawCircle(orbit0, Diameter0);  // ****Translation into orbiting entity
+    ofDrawCircle(orbit1, Diameter1);
+    ofDrawCircle(orbit2, Diameter2);
+    //ofDrawCircle(orbit3, Diameter3);
 
 }
 
