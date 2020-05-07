@@ -66,8 +66,10 @@ void ofApp::draw(){
     float diaMax0 = root["near_earth_objects"]["2020-04-23"][0]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
     string velo0  = root["near_earth_objects"]["2020-04-23"][0]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
     float Velo0   = std::stof(velo0);
-    std::cout << Velo0;
     speed0 = ofMap(Velo0, 4, 38, 0, 0.6);
+    string dis0     = root["near_earth_objects"]["2020-04-23"][0]["close_approach_data"][0]["miss_distance"]["astronomical"].asString();
+    float  Dis0   = std::stof(dis0);
+    float  distance0 = ofMap(Dis0, 0.05, 0.6, 100, 360);
     
     
     //text<<"velo0 = "<<velo0<<"."<<endl;
@@ -85,6 +87,10 @@ void ofApp::draw(){
      string velo1  = root["near_earth_objects"]["2020-04-23"][1]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
      float Velo1   = std::stof(velo1);
      speed1 = ofMap(Velo1, 4, 38, 0, 0.6);
+     string dis1     = root["near_earth_objects"]["2020-04-23"][1]["close_approach_data"][0]["miss_distance"]["astronomical"].asString();
+     float  Dis1   = std::stof(dis1);
+     float  distance1 = ofMap(Dis1, 0.05, 0.6, 100, 360);
+    
     
      //text<<"dia min = "<<diaMax0<<"."<<endl;
      float Dia1 = (diaMin1+diaMax1)/2;
@@ -98,6 +104,9 @@ void ofApp::draw(){
      string velo2  = root["near_earth_objects"]["2020-04-23"][1]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
      float Velo2   = std::stof(velo2);
      speed2 = ofMap(Velo2, 4, 38, 0, 0.6);
+     string dis2     = root["near_earth_objects"]["2020-04-23"][2]["close_approach_data"][0]["miss_distance"]["astronomical"].asString();
+     float  Dis2   = std::stof(dis2);
+     float  distance2 = ofMap(Dis2, 0.05, 0.6, 100, 360);
     
      text<<"dia min = "<<diaMax0<<"."<<endl;
      float Dia2 = (diaMin2+diaMax2)/2;
@@ -108,9 +117,9 @@ void ofApp::draw(){
     
     ofVec2f center(Width/2,Height/2), planet0, planet1, planet2, planet3, orbit0, orbit1, orbit2, orbit3;
     
-    planet0 = center + 100;   //rotating radius
-    planet1 = center + 200;
-    planet2 = center + 250;
+    planet0 = center + distance0;   //rotating radius
+    planet1 = center + distance1;
+    planet2 = center + distance2;
     planet3 = center + 350;
     orbit0 = planet0.rotate(degrees0+=speed0, center);
     orbit1 = planet1.rotate(degrees1+=speed1, center);
