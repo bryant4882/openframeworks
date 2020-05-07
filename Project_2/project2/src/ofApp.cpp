@@ -33,9 +33,13 @@ void ofApp::setup(){
     gui.setup(); // most of the time you don't need a name
    // gui.add(volumeFloatSlider.setup("volume", 0.2f, 0.0f, 1.0f));
    // gui.add(center.setup("center", {ofGetWidth()*.5, ofGetHeight()*.5}, {0, 0}, {ofGetWidth(), ofGetHeight()}));
-    //gui.add(color.setup("color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
+    gui.add(earthColor.setup("Earth color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
+    gui.add(neoColor.setup("Neo color", ofColor(250, 212, 97), ofColor(0, 0), ofColor(255, 255)));
+    gui.add(backColor.setup("Background color", ofColor(10, 10, 50), ofColor(0, 0), ofColor(255, 255)));
     gui.add(fontSize.setup("Font size", 6, 2, 15));
     gui.add(maxVelo.setup("Speed", 0.15, 0.005, 10));
+    gui.add(neoSize.setup("Neo size", 10, 5, 60));
+    gui.add(earthSize.setup("Earth size", 50, 40, 140));
     
     
  //   gui.add(Button.setup("scene"));
@@ -75,7 +79,7 @@ void ofApp::draw(){
     
     
     font1.load("ab.otf", fontSize);
-    ofColor colorOne(10, 10, 50);
+    ofColor colorOne(backColor);
     ofColor colorTwo(0, 0, 10);
 
     ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_CIRCULAR);
@@ -101,7 +105,7 @@ void ofApp::draw(){
     //text<<"velo0 = "<<velo0<<"."<<endl;
     float Dia0 = (diaMin0+diaMax0)/2;
    // ofDrawBitmapString(text.str(), 20, 200);
-    float Diameter0 = ofMap(Dia0,20, 900, 3, 10); // ****Diameter translation
+    float Diameter0 = ofMap(Dia0,20, 900, 3, neoSize); // ****Diameter translation
     
     //-------------------------------------------------------------------------------
     
@@ -121,7 +125,7 @@ void ofApp::draw(){
      //text<<"dia min = "<<diaMax0<<"."<<endl;
      float Dia1 = (diaMin1+diaMax1)/2;
     // ofDrawBitmapString(text.str(), 20, 200);
-     float Diameter1 = ofMap(Dia1,20, 900, 3, 10); // ****Diameter translation
+     float Diameter1 = ofMap(Dia1,20, 900, 3, neoSize); // ****Diameter translation
      
      //-------------------------------------------------------------------------------
      string name2  = root["near_earth_objects"]["2020-04-23"][2]["name"].asString();
@@ -137,7 +141,7 @@ void ofApp::draw(){
      text<<"dia min = "<<diaMax0<<"."<<endl;
      float Dia2 = (diaMin2+diaMax2)/2;
     // ofDrawBitmapString(text.str(), 20, 200);
-     float Diameter2 = ofMap(Dia2,20, 900, 3, 10); // ****Diameter translation
+     float Diameter2 = ofMap(Dia2,20, 900, 3, neoSize); // ****Diameter translation
     
      //-----------------------------------------------------------------------------
        string name3  = root["near_earth_objects"]["2020-04-23"][3]["name"].asString();
@@ -154,7 +158,7 @@ void ofApp::draw(){
        //text<<"velo0 = "<<velo0<<"."<<endl;
        float Dia3 = (diaMin3+diaMax3)/2;
       // ofDrawBitmapString(text.str(), 20, 200);
-       float Diameter3 = ofMap(Dia3,20, 900, 3, 10); // ****Diameter translation
+       float Diameter3 = ofMap(Dia3,20, 900, 3, neoSize); // ****Diameter translation
     
      //-------------------------------------------------------------------------------
     
@@ -172,7 +176,7 @@ void ofApp::draw(){
        //text<<"velo0 = "<<velo0<<"."<<endl;
        float Dia4 = (diaMin4+diaMax4)/2;
       // ofDrawBitmapString(text.str(), 20, 200);
-       float Diameter4 = ofMap(Dia4,20, 900, 3, 10); // ****Diameter translation
+       float Diameter4 = ofMap(Dia4,20, 900, 3, neoSize); // ****Diameter translation
     
      //-------------------------------------------------------------------------------
     
@@ -190,7 +194,7 @@ void ofApp::draw(){
        //text<<"velo0 = "<<velo0<<"."<<endl;
        float Dia5 = (diaMin5+diaMax5)/2;
       // ofDrawBitmapString(text.str(), 20, 200);
-       float Diameter5 = ofMap(Dia5,20, 900, 3, 10); // ****Diameter translation
+       float Diameter5 = ofMap(Dia5,20, 900, 3, neoSize); // ****Diameter translation
     
      //-------------------------------------------------------------------------------
     
@@ -208,7 +212,7 @@ void ofApp::draw(){
        //text<<"velo0 = "<<velo0<<"."<<endl;
        float Dia6 = (diaMin6+diaMax6)/2;
       // ofDrawBitmapString(text.str(), 20, 200);
-       float Diameter6 = ofMap(Dia6,20, 900, 3, 10); // ****Diameter translation
+       float Diameter6 = ofMap(Dia6,20, 900, 3, neoSize); // ****Diameter translation
     
      //-------------------------------------------------------------------------------
     
@@ -226,7 +230,7 @@ void ofApp::draw(){
        //text<<"velo0 = "<<velo0<<"."<<endl;
        float Dia7 = (diaMin7+diaMax7)/2;
       // ofDrawBitmapString(text.str(), 20, 200);
-       float Diameter7 = ofMap(Dia7,20, 900, 3, 10); // ****Diameter translation
+       float Diameter7 = ofMap(Dia7,20, 900, 3, neoSize); // ****Diameter translation
     
      //-------------------------------------------------------------------------------
     
@@ -244,7 +248,7 @@ void ofApp::draw(){
        //text<<"velo0 = "<<velo0<<"."<<endl;
        float Dia8 = (diaMin8+diaMax8)/2;
       // ofDrawBitmapString(text.str(), 20, 200);
-       float Diameter8 = ofMap(Dia8,20, 900, 3, 10); // ****Diameter translation
+       float Diameter8 = ofMap(Dia8,20, 900, 3, neoSize); // ****Diameter translation
     
      //-------------------------------------------------------------------------------
     
@@ -262,7 +266,7 @@ void ofApp::draw(){
        //text<<"velo0 = "<<velo0<<"."<<endl;
        float Dia9 = (diaMin9+diaMax9)/2;
       // ofDrawBitmapString(text.str(), 20, 200);
-       float Diameter9 = ofMap(Dia9,20, 900, 3, 10); // ****Diameter translation
+       float Diameter9 = ofMap(Dia9,20, 900, 3, neoSize); // ****Diameter translation
     
      //-------------------------------------------------------------------------------
     
@@ -300,9 +304,9 @@ void ofApp::draw(){
 
     
     //ofNoFill();
-    ofSetColor(30, 100, 240);
-    ofDrawCircle(center, 50);
-    ofSetColor(250, 212, 97);
+    ofSetColor(earthColor);
+    ofDrawCircle(center, earthSize);
+    ofSetColor(neoColor);
     ofDrawCircle(orbit0, Diameter0);  // ****Translation into orbiting entity
     ofDrawCircle(orbit1, Diameter1);
     ofDrawCircle(orbit2, Diameter2);

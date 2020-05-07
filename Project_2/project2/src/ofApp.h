@@ -23,8 +23,11 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
     
-    ofxFloatSlider volumeFloatSlider;
-    ofxColorSlider color;
+    ofxFloatSlider neoSize;
+    ofxFloatSlider earthSize;
+    ofxColorSlider earthColor;
+    ofxColorSlider neoColor;
+    ofxColorSlider backColor;
     ofxVec2Slider center;
     ofxIntSlider fontSize;
     ofxFloatSlider maxVelo;
