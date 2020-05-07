@@ -24,6 +24,7 @@ class ofApp : public ofBaseApp{
 		
     
     ofxFloatSlider neoSize;
+    ofxFloatSlider textalp;
     ofxFloatSlider earthSize;
     ofxColorSlider earthColor;
     ofxColorSlider neoColor;

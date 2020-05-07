@@ -40,8 +40,7 @@ void ofApp::setup(){
     gui.add(maxVelo.setup("Speed", 0.15, 0.005, 10));
     gui.add(neoSize.setup("Neo size", 10, 5, 60));
     gui.add(earthSize.setup("Earth size", 50, 40, 140));
-    
-    
+    gui.add(textalp.setup("Text alpha", 90, 0, 100));
  //   gui.add(Button.setup("scene"));
   //  gui.add(screenSize.setup("screen size", ofToString(ofGetWidth())+"x"+ofToString(ofGetHeight())));
     
@@ -321,7 +320,7 @@ void ofApp::draw(){
 
 
 
-    ofSetColor(230);
+    ofSetColor(255, textalp);
     font1.drawString(name0, orbit0.x+Diameter0, orbit0.y-Diameter0);
     font1.drawString(name1, orbit1.x+Diameter1, orbit1.y-Diameter1);
     font1.drawString(name2, orbit2.x+Diameter2, orbit2.y-Diameter2);
