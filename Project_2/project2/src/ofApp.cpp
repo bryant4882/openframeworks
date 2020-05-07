@@ -1,3 +1,7 @@
+//The visualization will include color, shapes, movement, text, fonts
+
+//A UI to manually change each variable used
+
 #include "ofApp.h"
 #include "ofxJSON.h"
 #include "ofxGui.h"
@@ -11,7 +15,8 @@ float degrees6 = 10;
 float degrees7 = 180;
 float degrees8 = 310;
 float degrees9 = 280;
-
+ofTrueTypeFont font1;
+int fontSize = 6;
 //float velo0, vlo1, velo2; //actual velo
 float speed0, speed1, speed2, speed3, speed4, speed5, speed6, speed7, speed8, speed9; //mapped speed
 
@@ -55,7 +60,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    
+    font1.load("ab.otf", fontSize);
     ofColor colorOne(10, 10, 50);
     ofColor colorTwo(0, 0, 10);
 
@@ -280,8 +285,10 @@ void ofApp::draw(){
 
 
     
-    ofNoFill();
+    //ofNoFill();
+    ofSetColor(30, 100, 240);
     ofDrawCircle(center, 50);
+    ofSetColor(250, 212, 97);
     ofDrawCircle(orbit0, Diameter0);  // ****Translation into orbiting entity
     ofDrawCircle(orbit1, Diameter1);
     ofDrawCircle(orbit2, Diameter2);
@@ -296,17 +303,27 @@ void ofApp::draw(){
 
 
 
-
-    ofDrawBitmapString(name0, orbit0+Diameter0);
-    ofDrawBitmapString(name1, orbit1+Diameter1);
-    ofDrawBitmapString(name2, orbit2+Diameter2);
-    ofDrawBitmapString(name3, orbit3+Diameter3);
-    ofDrawBitmapString(name4, orbit4+Diameter4);
-    ofDrawBitmapString(name5, orbit5+Diameter5);
-    ofDrawBitmapString(name6, orbit6+Diameter6);
-    ofDrawBitmapString(name7, orbit7+Diameter7);
-    ofDrawBitmapString(name8, orbit8+Diameter8);
-    ofDrawBitmapString(name9, orbit9+Diameter9);
+    ofSetColor(230);
+    font1.drawString(name0, orbit0.x+Diameter0, orbit0.y-Diameter0);
+    font1.drawString(name1, orbit1.x+Diameter1, orbit1.y-Diameter1);
+    font1.drawString(name2, orbit2.x+Diameter2, orbit2.y-Diameter2);
+    font1.drawString(name3, orbit3.x+Diameter3, orbit3.y-Diameter3);
+    font1.drawString(name4, orbit4.x+Diameter4, orbit4.y-Diameter4);
+    font1.drawString(name5, orbit5.x+Diameter5, orbit5.y-Diameter5);
+    font1.drawString(name6, orbit6.x+Diameter6, orbit6.y-Diameter6);
+    font1.drawString(name7, orbit7.x+Diameter7, orbit7.y-Diameter7);
+    font1.drawString(name8, orbit8.x+Diameter8, orbit8.y-Diameter8);
+    font1.drawString(name9, orbit9.x+Diameter9, orbit9.y-Diameter9);
+   // ofDrawBitmapString(name0, orbit0+Diameter0);
+//    ofDrawBitmapString(name1, orbit1+Diameter1);
+//    ofDrawBitmapString(name2, orbit2+Diameter2);
+//    ofDrawBitmapString(name3, orbit3+Diameter3);
+//    ofDrawBitmapString(name4, orbit4+Diameter4);
+//    ofDrawBitmapString(name5, orbit5+Diameter5);
+//    ofDrawBitmapString(name6, orbit6+Diameter6);
+//    ofDrawBitmapString(name7, orbit7+Diameter7);
+//    ofDrawBitmapString(name8, orbit8+Diameter8);
+//    ofDrawBitmapString(name9, orbit9+Diameter9);
 
 
 

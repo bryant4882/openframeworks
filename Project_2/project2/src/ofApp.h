@@ -21,4 +21,13 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
+    
+    ofxFloatSlider volumeFloatSlider;
+    ofxColorSlider color;
+    ofxVec2Slider center;
+    ofxIntSlider dis;
+    ofxButton Button;
+    ofxLabel screenSize;
+
+    ofxPanel gui;
 };
