@@ -5,8 +5,8 @@ float degrees0 = 0;
 float degrees1 = 120;
 float degrees2 = 20;
 float degrees3 = 80;
-
-  
+//float velo0, vlo1, velo2; //actual velo
+float speed0, speed1, speed2; //mapped speed
 
 
 
@@ -49,8 +49,8 @@ void ofApp::update(){
 void ofApp::draw(){
     
     
-    ofColor colorOne(30, 30, 100);
-    ofColor colorTwo(150, 150, 255);
+    ofColor colorOne(10, 10, 50);
+    ofColor colorTwo(50, 50, 70);
 
     ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_CIRCULAR);
     
@@ -58,12 +58,19 @@ void ofApp::draw(){
     float Width = ofGetWidth();
     float Height = ofGetHeight();
     
+  //velo ranges from 7 to 38 in 9 objs
+    
   //-----------------------------------------------------------------------------
     
     float diaMin0 = root["near_earth_objects"]["2020-04-23"][0]["estimated_diameter"]["meters"]["estimated_diameter_min"].asFloat();
-    float diaMax0 =
-        root["near_earth_objects"]["2020-04-23"][0]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
-    text<<"dia min = "<<diaMax0<<"."<<endl;
+    float diaMax0 = root["near_earth_objects"]["2020-04-23"][0]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
+    string velo0  = root["near_earth_objects"]["2020-04-23"][0]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
+    float Velo0   = std::stof(velo0);
+    std::cout << Velo0;
+    speed0 = ofMap(Velo0, 4, 38, 0, 0.6);
+    
+    
+    //text<<"velo0 = "<<velo0<<"."<<endl;
     float Dia0 = (diaMin0+diaMax0)/2;
    // ofDrawBitmapString(text.str(), 20, 200);
     float Diameter0 = ofMap(Dia0,20, 100, 3, 20); // ****Diameter translation
@@ -74,9 +81,12 @@ void ofApp::draw(){
 
      
      float diaMin1 = root["near_earth_objects"]["2020-04-23"][1]["estimated_diameter"]["meters"]["estimated_diameter_min"].asFloat();
-     float diaMax1 =
-         root["near_earth_objects"]["2020-04-23"][1]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
-     text<<"dia min = "<<diaMax0<<"."<<endl;
+     float diaMax1 = root["near_earth_objects"]["2020-04-23"][1]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
+     string velo1  = root["near_earth_objects"]["2020-04-23"][1]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
+     float Velo1   = std::stof(velo1);
+     speed1 = ofMap(Velo1, 4, 38, 0, 0.6);
+    
+     //text<<"dia min = "<<diaMax0<<"."<<endl;
      float Dia1 = (diaMin1+diaMax1)/2;
     // ofDrawBitmapString(text.str(), 20, 200);
      float Diameter1 = ofMap(Dia1,20, 100, 3, 20); // ****Diameter translation
@@ -84,8 +94,11 @@ void ofApp::draw(){
      //-------------------------------------------------------------------------------
     
      float diaMin2 = root["near_earth_objects"]["2020-04-23"][2]["estimated_diameter"]["meters"]["estimated_diameter_min"].asFloat();
-     float diaMax2 =
-         root["near_earth_objects"]["2020-04-23"][2]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
+     float diaMax2 = root["near_earth_objects"]["2020-04-23"][2]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
+     string velo2  = root["near_earth_objects"]["2020-04-23"][1]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
+     float Velo2   = std::stof(velo2);
+     speed2 = ofMap(Velo2, 4, 38, 0, 0.6);
+    
      text<<"dia min = "<<diaMax0<<"."<<endl;
      float Dia2 = (diaMin2+diaMax2)/2;
     // ofDrawBitmapString(text.str(), 20, 200);
@@ -99,9 +112,9 @@ void ofApp::draw(){
     planet1 = center + 200;
     planet2 = center + 250;
     planet3 = center + 350;
-    orbit0 = planet0.rotate(degrees0+=0.2, center);
-    orbit1 = planet1.rotate(degrees1+=0.12, center);
-    orbit2 = planet2.rotate(degrees2+=0.5, center);
+    orbit0 = planet0.rotate(degrees0+=speed0, center);
+    orbit1 = planet1.rotate(degrees1+=speed1, center);
+    orbit2 = planet2.rotate(degrees2+=speed2, center);
     orbit3 = planet3.rotate(degrees3+=0.03, center);
 
     
