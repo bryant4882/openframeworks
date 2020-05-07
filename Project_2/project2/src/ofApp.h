@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
 
@@ -25,7 +26,8 @@ class ofApp : public ofBaseApp{
     ofxFloatSlider volumeFloatSlider;
     ofxColorSlider color;
     ofxVec2Slider center;
-    ofxIntSlider dis;
+    ofxIntSlider fontSize;
+    ofxFloatSlider maxVelo;
     ofxButton Button;
     ofxLabel screenSize;
 

@@ -30,6 +30,18 @@ std::ostringstream textTime;
 void ofApp::setup(){
     
     
+    gui.setup(); // most of the time you don't need a name
+   // gui.add(volumeFloatSlider.setup("volume", 0.2f, 0.0f, 1.0f));
+   // gui.add(center.setup("center", {ofGetWidth()*.5, ofGetHeight()*.5}, {0, 0}, {ofGetWidth(), ofGetHeight()}));
+    //gui.add(color.setup("color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
+    gui.add(fontSize.setup("Font size", 6, 2, 15));
+    gui.add(maxVelo.setup("Speed", 0.15, 0.005, 10));
+    
+    
+ //   gui.add(Button.setup("scene"));
+  //  gui.add(screenSize.setup("screen size", ofToString(ofGetWidth())+"x"+ofToString(ofGetHeight())));
+    
+    
     ofSetCircleResolution(128);
     float Width = ofGetWidth();
     float Height = ofGetHeight();
@@ -60,6 +72,8 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
+    
+    
     font1.load("ab.otf", fontSize);
     ofColor colorOne(10, 10, 50);
     ofColor colorTwo(0, 0, 10);
@@ -78,7 +92,7 @@ void ofApp::draw(){
     float diaMax0 = root["near_earth_objects"]["2020-04-23"][0]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
     string velo0  = root["near_earth_objects"]["2020-04-23"][0]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
     float Velo0   = std::stof(velo0);
-    speed0 = ofMap(Velo0, 4, 38, 0, 0.15);
+    speed0 = ofMap(Velo0, 4, 38, 0, maxVelo);
     string dis0     = root["near_earth_objects"]["2020-04-23"][0]["close_approach_data"][0]["miss_distance"]["astronomical"].asString();
     float  Dis0   = std::stof(dis0);
     float  distance0 = ofMap(Dis0, 0.05, 0.6, 100, 300);
@@ -98,7 +112,7 @@ void ofApp::draw(){
      float diaMax1 = root["near_earth_objects"]["2020-04-23"][1]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
      string velo1  = root["near_earth_objects"]["2020-04-23"][1]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
      float Velo1   = std::stof(velo1);
-     speed1 = ofMap(Velo1, 4, 38, 0, 0.15);
+     speed1 = ofMap(Velo1, 4, 38, 0, maxVelo);
      string dis1     = root["near_earth_objects"]["2020-04-23"][1]["close_approach_data"][0]["miss_distance"]["astronomical"].asString();
      float  Dis1   = std::stof(dis1);
      float  distance1 = ofMap(Dis1, 0.05, 0.6, 100, 300);
@@ -115,7 +129,7 @@ void ofApp::draw(){
      float diaMax2 = root["near_earth_objects"]["2020-04-23"][2]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
      string velo2  = root["near_earth_objects"]["2020-04-23"][1]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
      float Velo2   = std::stof(velo2);
-     speed2 = ofMap(Velo2, 4, 38, 0, 0.15);
+     speed2 = ofMap(Velo2, 4, 38, 0, maxVelo);
      string dis2   = root["near_earth_objects"]["2020-04-23"][2]["close_approach_data"][0]["miss_distance"]["astronomical"].asString();
      float  Dis2   = std::stof(dis2);
      float  distance2 = ofMap(Dis2, 0.05, 0.6, 100, 300);
@@ -131,7 +145,7 @@ void ofApp::draw(){
        float diaMax3 = root["near_earth_objects"]["2020-04-23"][3]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
        string velo3  = root["near_earth_objects"]["2020-04-23"][3]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
        float Velo3   = std::stof(velo3);
-       speed3 = ofMap(Velo3, 4, 38, 0, 0.15);
+       speed3 = ofMap(Velo3, 4, 38, 0, maxVelo);
        string dis3     = root["near_earth_objects"]["2020-04-23"][3]["close_approach_data"][0]["miss_distance"]["astronomical"].asString();
        float  Dis3  = std::stof(dis3);
        float  distance3 = ofMap(Dis3, 0.05, 0.6, 100, 300);
@@ -149,7 +163,7 @@ void ofApp::draw(){
        float diaMax4 = root["near_earth_objects"]["2020-04-23"][4]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
        string velo4  = root["near_earth_objects"]["2020-04-23"][4]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
        float Velo4   = std::stof(velo4);
-       speed4 = ofMap(Velo4, 4, 38, 0, 0.15);
+       speed4 = ofMap(Velo4, 4, 38, 0, maxVelo);
        string dis4     = root["near_earth_objects"]["2020-04-23"][4]["close_approach_data"][0]["miss_distance"]["astronomical"].asString();
        float  Dis4  = std::stof(dis4);
        float  distance4 = ofMap(Dis4, 0.05, 0.6, 100, 300);
@@ -167,7 +181,7 @@ void ofApp::draw(){
        float diaMax5 = root["near_earth_objects"]["2020-04-23"][5]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
        string velo5  = root["near_earth_objects"]["2020-04-23"][5]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
        float Velo5   = std::stof(velo5);
-       speed5 = ofMap(Velo5, 4, 38, 0, 0.15);
+       speed5 = ofMap(Velo5, 4, 38, 0, maxVelo);
        string dis5     = root["near_earth_objects"]["2020-04-23"][5]["close_approach_data"][0]["miss_distance"]["astronomical"].asString();
        float  Dis5  = std::stof(dis5);
        float  distance5 = ofMap(Dis5, 0.05, 0.6, 100, 300);
@@ -185,7 +199,7 @@ void ofApp::draw(){
        float diaMax6 = root["near_earth_objects"]["2020-04-23"][6]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
        string velo6  = root["near_earth_objects"]["2020-04-23"][6]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
        float Velo6   = std::stof(velo6);
-       speed6 = ofMap(Velo6, 4, 38, 0, 0.15);
+       speed6 = ofMap(Velo6, 4, 38, 0, maxVelo);
        string dis6     = root["near_earth_objects"]["2020-04-23"][6]["close_approach_data"][0]["miss_distance"]["astronomical"].asString();
        float  Dis6  = std::stof(dis6);
        float  distance6 = ofMap(Dis6, 0.05, 0.6, 100, 300);
@@ -203,7 +217,7 @@ void ofApp::draw(){
        float diaMax7 = root["near_earth_objects"]["2020-04-23"][7]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
        string velo7  = root["near_earth_objects"]["2020-04-23"][7]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
        float Velo7   = std::stof(velo7);
-       speed7 = ofMap(Velo7, 4, 38, 0, 0.15);
+       speed7 = ofMap(Velo7, 4, 38, 0, maxVelo);
        string dis7     = root["near_earth_objects"]["2020-04-23"][7]["close_approach_data"][0]["miss_distance"]["astronomical"].asString();
        float  Dis7  = std::stof(dis7);
        float  distance7 = ofMap(Dis7, 0.05, 0.6, 100, 300);
@@ -221,7 +235,7 @@ void ofApp::draw(){
        float diaMax8 = root["near_earth_objects"]["2020-04-23"][8]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
        string velo8  = root["near_earth_objects"]["2020-04-23"][8]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
        float Velo8   = std::stof(velo8);
-       speed8 = ofMap(Velo8, 4, 38, 0, 0.15);
+       speed8 = ofMap(Velo8, 4, 38, 0, maxVelo);
        string dis8     = root["near_earth_objects"]["2020-04-23"][8]["close_approach_data"][0]["miss_distance"]["astronomical"].asString();
        float  Dis8  = std::stof(dis8);
        float  distance8 = ofMap(Dis8, 0.05, 0.6, 100, 300);
@@ -239,7 +253,7 @@ void ofApp::draw(){
        float diaMax9 = root["near_earth_objects"]["2020-04-23"][9]["estimated_diameter"]["meters"]["estimated_diameter_max"].asFloat();
        string velo9  = root["near_earth_objects"]["2020-04-23"][9]["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"].asString();
        float Velo9   = std::stof(velo9);
-       speed9 = ofMap(Velo9, 4, 38, 0, 0.15);
+       speed9 = ofMap(Velo9, 4, 38, 0, maxVelo);
        string dis9     = root["near_earth_objects"]["2020-04-23"][9]["close_approach_data"][0]["miss_distance"]["astronomical"].asString();
        float  Dis9  = std::stof(dis9);
        float  distance9 = ofMap(Dis9, 0.05, 0.6, 100, 300);
@@ -327,7 +341,7 @@ void ofApp::draw(){
 
 
 
-
+ gui.draw();
 
 
 }
