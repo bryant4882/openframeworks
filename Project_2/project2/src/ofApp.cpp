@@ -1,7 +1,11 @@
 #include "ofApp.h"
 #include "ofxJSON.h"
 #include "ofxGui.h"
-int degrees = 0;
+float degrees0 = 0;
+float degrees1 = 120;
+float degrees2 = 20;
+float degrees3 = 80;
+
   
 
 
@@ -12,6 +16,7 @@ std::ostringstream textTime;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
     
     ofSetCircleResolution(128);
     float Width = ofGetWidth();
@@ -42,6 +47,13 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    
+    ofColor colorOne(30, 30, 100);
+    ofColor colorTwo(150, 150, 255);
+
+    ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_CIRCULAR);
+    
     
     float Width = ofGetWidth();
     float Height = ofGetHeight();
@@ -81,14 +93,19 @@ void ofApp::draw(){
      
      //-------------------------------------------------------------------------------
     
-    ofVec2f center(Width/2,Height/2), planet, orbit0, orbit1, orbit2, orbit3;
+    ofVec2f center(Width/2,Height/2), planet0, planet1, planet2, planet3, orbit0, orbit1, orbit2, orbit3;
     
-    planet = center + 100;
-    orbit0 = planet.rotate(degrees++, center);
-    orbit1 = planet.rotate(degrees--, center);
-    orbit2 = planet.rotate(degrees++, center);
-    orbit3 = planet.rotate(degrees++, center);
+    planet0 = center + 100;   //rotating radius
+    planet1 = center + 200;
+    planet2 = center + 250;
+    planet3 = center + 350;
+    orbit0 = planet0.rotate(degrees0+=0.2, center);
+    orbit1 = planet1.rotate(degrees1+=0.12, center);
+    orbit2 = planet2.rotate(degrees2+=0.5, center);
+    orbit3 = planet3.rotate(degrees3+=0.03, center);
 
+    
+    ofNoFill();
     ofDrawCircle(center, 50);
     ofDrawCircle(orbit0, Diameter0);  // ****Translation into orbiting entity
     ofDrawCircle(orbit1, Diameter1);
