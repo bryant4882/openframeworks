@@ -20,7 +20,7 @@ Due the nature of the API call (including a set time frame), this project serves
 
 Link to video under:
 [![img](img/gif.gif)](https://www.youtube.com/watch?v=wysSOkIXaCs)
-![img](img/s1.png)
-![img](img/s2.png)
-![img](img/s3.png)
+![img](img/sc1.png)
+![img](img/sc2.png)
+![img](img/sc3.png)
 
