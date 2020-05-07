@@ -31,7 +31,7 @@ Due the nature of the API call (including a set time frame), this project serves
 
 
 
-Link to video under ↴
+Link to video below  ↴
 [![img](img/gif.gif)](https://www.youtube.com/watch?v=wysSOkIXaCs)
 ![img](img/sc1.png)
 ![img](img/sc2.png)
